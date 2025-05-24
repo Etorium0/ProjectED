@@ -18,40 +18,35 @@ public class Player : MonoBehaviour
     public PlayerWallClimbState WallClimbState { get; private set; }
     public PlayerWallJumpState WallJumpState { get; private set; }
     public PlayerLedgeClimbState LedgeClimbState { get; private set; }
+    public PlayerDashState DashState { get; private set; }
+    public PlayerCrouchIdleState CrouchIdleState { get; private set; }
+    public PlayerCrouchMoveState CrouchMoveState { get; private set; }
+    public PlayerAttackState PrimaryAttackState { get; private set; }
+    public PlayerAttackState SecondaryAttackState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
     #endregion
 
     #region Components
+    public Core Core { get; private set; }
     public Animator Anim { get; private set; }
     public PlayerInputHandler InputHandler { get; private set; }
     public Rigidbody2D RB { get; private set; }
-    #endregion
-
-    #region Check Transforms
-
-    [SerializeField]
-    private Transform groundCheck;
-
-    [SerializeField]
-    private Transform wallCheck;
-
-    [SerializeField]
-    private Transform ledgeCheck;
-
+    public Transform DashDirectionIndicator { get; private set; }
+    public BoxCollider2D MovementCollider { get; private set; }
+    public PlayerInventory Inventory { get; private set; }
     #endregion
 
     #region Other Variables
-    public Vector2 CurrentVelocity { get; private set; }
-    public int FacingDirection { get; private set; }    
-
     private Vector2 workspace;
     #endregion
 
     #region Unity Callback Functions
     private void Awake()
     {
+        Core = GetComponentInChildren<Core>();
+
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -63,7 +58,12 @@ public class Player : MonoBehaviour
         WallGrabState = new PlayerWallGrabState(this, StateMachine, playerData, "wallGrab");
         WallClimbState = new PlayerWallClimbState(this, StateMachine, playerData, "wallClimb");
         WallJumpState = new PlayerWallJumpState(this, StateMachine, playerData, "inAir");
-        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimb");
+        LedgeClimbState = new PlayerLedgeClimbState(this, StateMachine, playerData, "ledgeClimbState");
+        DashState = new PlayerDashState(this, StateMachine, playerData, "inAir");
+        CrouchIdleState = new PlayerCrouchIdleState(this, StateMachine, playerData, "crouchIdle");
+        CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
+        PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
+        SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack");
     }
 
     private void Start()
@@ -71,15 +71,19 @@ public class Player : MonoBehaviour
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
         RB = GetComponent<Rigidbody2D>();
+        DashDirectionIndicator = transform.Find("DashDirectionIndicator");
+        MovementCollider = GetComponent<BoxCollider2D>();
+        Inventory = GetComponent<PlayerInventory>();
 
-        FacingDirection = 1;
-
+        PrimaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
+        //SecondaryAttackState.SetWeapon(Inventory.weapons[(int)CombatInputs.primary]);
         StateMachine.Initialize(IdleState);
     }
 
     private void Update()
     {
-        CurrentVelocity = RB.linearVelocity;
+        Core.LogicUpdate();
+
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -89,91 +93,22 @@ public class Player : MonoBehaviour
     }
     #endregion
 
-    #region Set Functions
-    public void SetVelocityZero()
-    {
-        RB.linearVelocity = Vector2.zero;
-        CurrentVelocity = Vector2.zero;
-    }
-    public void SetVelocityX(float velocity)
-    {
-        workspace.Set(velocity, CurrentVelocity.y);
-        RB.linearVelocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocityY(float velocity)
-    {
-        workspace.Set(CurrentVelocity.x, velocity);
-        RB.linearVelocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    public void SetVelocity(float velocity, Vector2 angle, int direction)
-    {
-        angle.Normalize();
-        workspace.Set(angle.x * velocity * direction, angle.y * velocity);
-        RB.linearVelocity = workspace;
-        CurrentVelocity = workspace;
-    }
-
-    #endregion
-
-    #region Check Functions
-
-    public bool CheckIfTouchingLedge()
-    {
-        return Physics2D.Raycast(ledgeCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    public bool CheckIfGrounded()
-    {
-        return Physics2D.OverlapCircle(groundCheck.position, playerData.groundCheckRadius, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingWall()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    public bool CheckIfTouchingWallBack()
-    {
-        return Physics2D.Raycast(wallCheck.position, Vector2.right * -FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-    }
-
-    public void CheckIfShouldFlip(int xInput)
-    {
-        if(xInput != 0 && xInput != FacingDirection)
-        {
-            Flip();
-        }
-    }
-
-    #endregion
-
     #region Other Functions
 
-    public Vector2 DetermineCornerPosition()
+    public void SetColliderHeight(float height)
     {
-        RaycastHit2D xhit = Physics2D.Raycast(ledgeCheck.position, Vector2.right * FacingDirection, playerData.wallCheckDistance, playerData.whatIsGround);
-        float xDistance = xhit.distance;
-        workspace.Set(xDistance * FacingDirection, 0f);
-        RaycastHit2D yhit = Physics2D.Raycast(ledgeCheck.position + (Vector3)(workspace), Vector2.down, playerData.wallCheckDistance - wallCheck.position.y, playerData.whatIsGround);
-        float yDistance = yhit.distance;
+        Vector2 center = MovementCollider.offset;
+        workspace.Set(MovementCollider.size.x, height);
 
-        workspace.Set(wallCheck.position.x + (xDistance * FacingDirection), ledgeCheck.position.y - yDistance);
-        return workspace;
+        center.y += (height - MovementCollider.size.y) / 2;
+
+        MovementCollider.size = workspace;
+        MovementCollider.offset = center;
     }
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
     private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
-    private void Flip()
-    {
-        FacingDirection *= -1;
-        transform.Rotate(0.0f, 180.0f, 0.0f);
-    }
-    
     #endregion
 }

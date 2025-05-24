@@ -1,3 +1,5 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerWallClimbState : PlayerTouchingWallState
@@ -12,13 +14,14 @@ public class PlayerWallClimbState : PlayerTouchingWallState
 
         if (!isExitingState)
         {
-            player.SetVelocityY(playerData.wallClimbVelocity);
+            core.Movement.SetVelocityY(playerData.wallClimbVelocity);
 
-            if (yInput != 1 && !isExitingState)
+            if (yInput != 1)
             {
                 stateMachine.ChangeState(player.WallGrabState);
             }
         }
 
+        
     }
 }

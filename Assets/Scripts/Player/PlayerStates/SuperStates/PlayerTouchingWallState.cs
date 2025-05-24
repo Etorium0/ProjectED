@@ -1,11 +1,14 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerTouchingWallState : PlayerState
 {
     protected bool isGrounded;
     protected bool isTouchingWall;
-    protected bool jumpInput;
     protected bool grabInput;
+    protected bool jumpInput;
+    protected bool isTouchingLedge;
     protected int xInput;
     protected int yInput;
 
@@ -13,13 +16,28 @@ public class PlayerTouchingWallState : PlayerState
     {
     }
 
-    
+    public override void AnimationFinishTrigger()
+    {
+        base.AnimationFinishTrigger();
+    }
+
+    public override void AnimationTrigger()
+    {
+        base.AnimationTrigger();
+    }
+
     public override void DoChecks()
     {
         base.DoChecks();
 
-        isGrounded = player.CheckIfGrounded();
-        isTouchingWall = player.CheckIfTouchingWall();
+        isGrounded = core.CollisionSenses.Ground;
+        isTouchingWall = core.CollisionSenses.WallFront;
+        isTouchingLedge = core.CollisionSenses.Ledge;
+
+        if(isTouchingWall && !isTouchingLedge)
+        {
+            player.LedgeClimbState.SetDetectedPosition(player.transform.position);
+        }
     }
 
     public override void Enter()
@@ -42,7 +60,7 @@ public class PlayerTouchingWallState : PlayerState
         jumpInput = player.InputHandler.JumpInput;
 
         if (jumpInput)
-        {
+        {            
             player.WallJumpState.DetermineWallJumpDirection(isTouchingWall);
             stateMachine.ChangeState(player.WallJumpState);
         }
@@ -50,25 +68,18 @@ public class PlayerTouchingWallState : PlayerState
         {
             stateMachine.ChangeState(player.IdleState);
         }
-        else if (!isTouchingWall || (xInput != player.FacingDirection && !grabInput))
+        else if(!isTouchingWall || (xInput != core.Movement.FacingDirection && !grabInput))
         {
             stateMachine.ChangeState(player.InAirState);
         }
-
+        else if(isTouchingWall && !isTouchingLedge)
+        {
+            stateMachine.ChangeState(player.LedgeClimbState);
+        }
     }
 
     public override void PhysicsUpdate()
     {
         base.PhysicsUpdate();
-    }
-
-    public override void AnimationTrigger()
-    {
-        base.AnimationTrigger();
-    }
-
-    public override void AnimationFinishTrigger()
-    {
-        base.AnimationFinishTrigger();
     }
 }
