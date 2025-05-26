@@ -38,7 +38,8 @@ public class Player : MonoBehaviour
     public PlayerInventory Inventory { get; private set; }
     #endregion
 
-    #region Other Variables
+    #region Other Variables         
+
     private Vector2 workspace;
     #endregion
 
@@ -83,7 +84,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         Core.LogicUpdate();
-
         StateMachine.CurrentState.LogicUpdate();
     }
 
@@ -104,11 +104,12 @@ public class Player : MonoBehaviour
 
         MovementCollider.size = workspace;
         MovementCollider.offset = center;
-    }
+    }   
 
     private void AnimationTrigger() => StateMachine.CurrentState.AnimationTrigger();
 
     private void AnimtionFinishTrigger() => StateMachine.CurrentState.AnimationFinishTrigger();
 
+   
     #endregion
 }

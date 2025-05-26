@@ -1,3 +1,5 @@
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CoreComponent : MonoBehaviour
@@ -8,9 +10,7 @@ public class CoreComponent : MonoBehaviour
     {
         core = transform.parent.GetComponent<Core>();
 
-        if (core == null)
-        {
-            Debug.LogError("There is no Core component on the parent GameObject of ");
-        }
+        if(core == null) { Debug.LogError("There is no Core on the parent"); }
     }
+
 }
