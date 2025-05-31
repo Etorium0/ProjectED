@@ -11,28 +11,19 @@ public class ParticleManager : CoreComponent
         particleContainer = GameObject.FindGameObjectWithTag("ParticleContainer").transform;
     }
 
-    public GameObject StartParticle(GameObject particlePrefab, Vector2 position, Quaternion rotation)
+    public GameObject StartParticles(GameObject particlePrefab, Vector2 position, Quaternion rotation)
     {
         return Instantiate(particlePrefab, position, rotation, particleContainer);
-        // ParticleSystem ps = particle.GetComponent<ParticleSystem>();
-
-        // if (ps != null)
-        // {
-        //     ps.Play();
-        // }
-
-        // return particle;
     }
 
-    public GameObject StartParticle(GameObject particlePrefab)
+    public GameObject StartParticles(GameObject particlePrefab)
     {
-        return StartParticle(particlePrefab, transform.position, Quaternion.identity);
+        return StartParticles(particlePrefab, transform.position, Quaternion.identity);
     }
 
-    public GameObject StartParticleWithRandomRotation(GameObject particlePrefab)
+    public GameObject StartParticlesWithRandomRotation(GameObject particlePrefab)
     {
         var randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
-        return StartParticle(particlePrefab, transform.position, randomRotation);
+        return StartParticles(particlePrefab, transform.position, randomRotation);
     }
-
 }
