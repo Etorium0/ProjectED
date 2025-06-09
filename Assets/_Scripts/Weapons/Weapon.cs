@@ -14,7 +14,8 @@ namespace Etorium.Weapons
             get => currentAttackCounter;
             private set => currentAttackCounter = value >= numberOfAttacks ? 0 : value; 
         }
-        
+
+        public event Action OnEnter;
         public event Action OnExit;
         
         private Animator anim;
@@ -35,6 +36,8 @@ namespace Etorium.Weapons
             
             anim.SetBool("active", true);
             anim.SetInteger("counter", CurrentAttackCounter);
+            
+            OnEnter?.Invoke();
         }
 
         private void Exit()
