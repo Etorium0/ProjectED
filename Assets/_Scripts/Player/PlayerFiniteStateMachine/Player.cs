@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Bardent.Weapons;
+using Etorium._Scripts.Weapons;
 using UnityEngine;
 using UnityEngine.Rendering;
 
