@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
 using Etorium.Utilities;
+using UnityEngine;
 
-namespace Etorium._Scripts.Weapons
+namespace Etorium.Weapons
 {
     public class Weapon : MonoBehaviour
     {
@@ -18,7 +18,8 @@ namespace Etorium._Scripts.Weapons
         public event Action OnExit;
         
         private Animator anim;
-        private GameObject baseGameObject;
+        public GameObject BaseGameObject {get; private set;}
+        public GameObject WeaponSpriteGameObject {get; private set;}
         
         private AnimationEventHandler eventHandler;
 
@@ -48,10 +49,11 @@ namespace Etorium._Scripts.Weapons
 
         private void Awake()
         {
-            baseGameObject = transform.Find("Base").gameObject;
-            anim = baseGameObject.GetComponent<Animator>();
+            BaseGameObject = transform.Find("Base").gameObject;
+            WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
+            anim = BaseGameObject.GetComponent<Animator>();
 
-            eventHandler = baseGameObject.GetComponent<AnimationEventHandler>();
+            eventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
 
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
         }

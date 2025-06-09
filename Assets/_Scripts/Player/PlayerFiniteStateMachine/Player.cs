@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium._Scripts.Weapons;
+using Etorium.Weapons;
 using UnityEngine;
 using UnityEngine.Rendering;
 
