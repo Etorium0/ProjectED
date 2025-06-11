@@ -1,4 +1,5 @@
 ﻿using System;
+using Etorium.CoreSystem;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
@@ -6,6 +7,9 @@ namespace Etorium.Weapons.Components
     public abstract class WeaponComponent : MonoBehaviour
     {
         protected Weapon weapon;
+
+        protected AnimationEventHandler EventHandler => weapon.EventHandler;
+        protected Core Core => weapon.Core;
 
         protected bool isAttackActive;
 
