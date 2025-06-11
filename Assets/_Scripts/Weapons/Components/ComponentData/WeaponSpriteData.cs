@@ -1,10 +1,9 @@
-﻿using Etorium.Weapons.Components.AttackData;
+﻿using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
-    public class WeaponSpriteData: ComponentData
+    public class WeaponSpriteData : ComponentData<AttackSprites>
     {
-        [field: SerializeField] public AttackSprites[] AttackData {get; private set;}
     }
 }

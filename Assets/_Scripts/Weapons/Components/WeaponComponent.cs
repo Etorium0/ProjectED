@@ -8,7 +8,7 @@ namespace Etorium.Weapons.Components
     {
         protected Weapon weapon;
 
-        // Todo: Fix when finish weapon data
+        // TODO: Fix this when finishing weapon data
         // protected AnimationEventHandler EventHandler => weapon.EventHandler;
         protected AnimationEventHandler eventHandler;
         protected Core Core => weapon.Core;
@@ -40,20 +40,28 @@ namespace Etorium.Weapons.Components
 
         protected virtual void OnDisable()
         {
-            weapon.OnEnter -= HandleExit;
+            weapon.OnEnter -= HandleEnter;
             weapon.OnExit -= HandleExit;
         }
     }
 
-    public abstract class WeaponComponent<T> : WeaponComponent where T : ComponentData
+    public abstract class WeaponComponent<T1, T2> : WeaponComponent where T1 : ComponentData<T2> where T2 : AttackData
     {
-        protected T data;
+        protected T1 data;
+        protected T2 currentAttackData;
 
-        override protected void Awake()
+        protected override void HandleEnter()
+        {
+            base.HandleEnter();
+
+            currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+        }
+
+        protected override void Awake()
         {
             base.Awake();
 
-            data = weapon.Data.GetData<T>();
+            data = weapon.Data.GetData<T1>();
         }
     }
 }

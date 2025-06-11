@@ -1,10 +1,9 @@
-﻿using Etorium.Weapons.Components.AttackData;
+﻿using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
-    public class MovementData : ComponentData
+    public class MovementData : ComponentData<AttackMovement>
     {
-        [field: SerializeField] public AttackMovement[] AttackData {get; private set;}
     }
 }

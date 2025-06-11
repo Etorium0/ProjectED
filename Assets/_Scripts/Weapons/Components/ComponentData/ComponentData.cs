@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
@@ -6,5 +7,11 @@ namespace Etorium.Weapons.Components
     public class ComponentData
     {
         
+    }
+
+    [Serializable]
+    public class ComponentData<T> : ComponentData where T : AttackData
+    {
+        [field: SerializeField] public T[] AttackData { get; private set; }
     }
 }

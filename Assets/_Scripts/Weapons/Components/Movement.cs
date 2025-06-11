@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
-    public class Movement : WeaponComponent<MovementData>
+    public class Movement : WeaponComponent<MovementData, AttackMovement>
     {
         private CoreSystem.Movement coreMovement;
 
@@ -12,8 +12,6 @@ namespace Etorium.Weapons.Components
         
         private void HandleStartMovement()
         {
-            var currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
-            
             CoreMovement.SetVelocity(currentAttackData.Velocity, currentAttackData.Direction, CoreMovement.FacingDirection);
         }
 
