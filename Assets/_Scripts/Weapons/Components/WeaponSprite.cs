@@ -1,5 +1,5 @@
 ﻿using System;
-using Etorium.Weapons.Components.ComponentData;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components

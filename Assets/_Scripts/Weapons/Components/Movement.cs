@@ -1,16 +1,14 @@
-﻿using Etorium.Weapons.Components.ComponentData;
+﻿using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
-    public class Movement : WeaponComponent
+    public class Movement : WeaponComponent<MovementData>
     {
         private CoreSystem.Movement coreMovement;
 
         private CoreSystem.Movement CoreMovement =>
             coreMovement ? coreMovement : Core.GetCoreComponent(ref coreMovement);
-
-        private MovementData data;
         
         private void HandleStartMovement()
         {
@@ -22,13 +20,6 @@ namespace Etorium.Weapons.Components
         private void HandleStopMovement()
         {
             CoreMovement.SetVelocityZero();
-        }
-
-        protected override void Awake()
-        {
-            base.Awake();
-
-            data = weapon.Data.GetData<MovementData>();
         }
 
         protected override void OnEnable()

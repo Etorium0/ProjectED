@@ -44,4 +44,16 @@ namespace Etorium.Weapons.Components
             weapon.OnExit -= HandleExit;
         }
     }
+
+    public abstract class WeaponComponent<T> : WeaponComponent where T : ComponentData
+    {
+        protected T data;
+
+        override protected void Awake()
+        {
+            base.Awake();
+
+            data = weapon.Data.GetData<T>();
+        }
+    }
 }

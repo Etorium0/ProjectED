@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Etorium.Weapons.Components.ComponentData
+namespace Etorium.Weapons.Components
 {
     [Serializable]
     public class ComponentData

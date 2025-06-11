@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Etorium.Weapons.Components.ComponentData;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons

@@ -1,7 +1,7 @@
-﻿using Etorium.Weapons.Components.ComponentData.AttackData;
+﻿using Etorium.Weapons.Components.AttackData;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components.ComponentData
+namespace Etorium.Weapons.Components
 {
     public class WeaponSpriteData: ComponentData
     {
