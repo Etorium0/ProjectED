@@ -13,7 +13,7 @@ namespace Etorium.Weapons
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
-            private set => currentAttackCounter = value >= Data.numberOfAttacks ? 0 : value; 
+            private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value; 
         }
 
         public event Action OnEnter;

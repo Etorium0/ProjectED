@@ -26,7 +26,7 @@ namespace Etorium.CoreSystem
 
         public override void LogicUpdate()
         {
-            CurrentVelocity = RB.velocity;
+            CurrentVelocity = RB.linearVelocity;
         }
 
         #region Set Functions
@@ -66,7 +66,7 @@ namespace Etorium.CoreSystem
         {
             if (CanSetVelocity)
             {
-                RB.velocity = workspace;
+                RB.linearVelocity = workspace;
                 CurrentVelocity = workspace;
             }        
         }

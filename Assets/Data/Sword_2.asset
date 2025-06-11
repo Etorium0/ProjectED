@@ -12,4 +12,43 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0afafe3154a545aeb3a2d29b89102501, type: 3}
   m_Name: Sword_2
   m_EditorClassIdentifier: 
-  <numberOfAttacks>k__BackingField: 0
+  <NumberOfAttacks>k__BackingField: 3
+  <ComponentData>k__BackingField:
+  - rid: 8921465091188588653
+  - rid: 8921465091188588657
+  references:
+    version: 2
+    RefIds:
+    - rid: 8921465091188588653
+      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components.ComponentData,
+        asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - <Sprites>k__BackingField:
+          - {fileID: -1420518866, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -1505483480, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 2084821773, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 521349678, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 1335786267, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+        - <Sprites>k__BackingField:
+          - {fileID: -809262849, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -42819579, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 1645220379, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -837185620, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 1231312736, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+        - <Sprites>k__BackingField:
+          - {fileID: -134458099, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -93232612, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -32343913, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: -1451863314, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+          - {fileID: 1661298058, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+    - rid: 8921465091188588657
+      type: {class: MovementData, ns: Etorium.Weapons.Components.ComponentData, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 3
+        - <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 4
+        - <Direction>k__BackingField: {x: 1, y: 5}
+          <Velocity>k__BackingField: 5

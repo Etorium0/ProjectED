@@ -8,7 +8,9 @@ namespace Etorium.Weapons.Components
     {
         protected Weapon weapon;
 
-        protected AnimationEventHandler EventHandler => weapon.EventHandler;
+        // Todo: Fix when finish weapon data
+        // protected AnimationEventHandler EventHandler => weapon.EventHandler;
+        protected AnimationEventHandler eventHandler;
         protected Core Core => weapon.Core;
 
         protected bool isAttackActive;
@@ -16,6 +18,8 @@ namespace Etorium.Weapons.Components
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();
+
+            eventHandler = GetComponentInChildren<AnimationEventHandler>();
         }
 
         protected virtual void HandleEnter()
