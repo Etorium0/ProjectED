@@ -1,4 +1,5 @@
 ﻿using System;
+using Etorium.Weapons.Components.ComponentData;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
@@ -7,11 +8,11 @@ namespace Etorium.Weapons.Components
     {
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
-
-        [SerializeField] private WeaponSprites[] weaponSprites;
-
+        
         private int currentWeaponSpriteIndex;
 
+        private WeaponSpriteData data;
+        
         protected override void HandleEnter()
         {
             base.HandleEnter();
@@ -27,7 +28,7 @@ namespace Etorium.Weapons.Components
                 return;
             }
 
-            var currentAttackSprite = weaponSprites[weapon.CurrentAttackCounter].Sprites;
+            var currentAttackSprite = data.AttackData[weapon.CurrentAttackCounter].Sprites;
 
             if (currentWeaponSpriteIndex >= currentAttackSprite.Length)
             {
@@ -46,7 +47,9 @@ namespace Etorium.Weapons.Components
             
             baseSpriteRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
             weaponSpriteRenderer = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
-            
+
+            data = weapon.Data.GetData<WeaponSpriteData>();
+
             // TODO: Fix this when have weapon data (WeaponSprite phụ thuộc vào Weapon để lấy gameObject nên nếu awake này được gọi trước weapon.Awake sẽ lõi nullrefer
             // baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
             // weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();
@@ -69,12 +72,5 @@ namespace Etorium.Weapons.Components
             
             weapon.OnEnter -= HandleEnter;
         }
-    }
-    
-    [Serializable] 
-
-    public class WeaponSprites
-    {
-        [field: SerializeField] public Sprite[] Sprites { get; private set;}
     }
 }
