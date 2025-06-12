@@ -16,6 +16,7 @@ MonoBehaviour:
   <ComponentData>k__BackingField:
   - rid: 8921465091188588650
   - rid: 8921465091188588656
+  - rid: 8921465116076802192
   references:
     version: 2
     RefIds:
@@ -51,3 +52,31 @@ MonoBehaviour:
           <Velocity>k__BackingField: 4
         - <Direction>k__BackingField: {x: 1, y: 5}
           <Velocity>k__BackingField: 5
+    - rid: 8921465116076802192
+      type: {class: ActionHitBoxData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -1.01
+            width: 1.6
+            height: 1.7
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -0.83
+            width: 1.65
+            height: 1.7
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -0.83
+            width: 1.55
+            height: 2.35
+        <DetectedLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
