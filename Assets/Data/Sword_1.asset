@@ -20,8 +20,7 @@ MonoBehaviour:
     version: 2
     RefIds:
     - rid: 8921465091188588650
-      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components,
-        asm: Assembly-CSharp}
+      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
       data:
         <AttackData>k__BackingField:
         - <Sprites>k__BackingField:
