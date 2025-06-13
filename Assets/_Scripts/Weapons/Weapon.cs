@@ -1,4 +1,5 @@
 using System;
+using Etorium.CoreSystem;
 using Etorium.Utilities;
 using UnityEngine;
 
@@ -6,13 +7,13 @@ namespace Etorium.Weapons
 {
     public class Weapon : MonoBehaviour
     {
-        [SerializeField] private int numberOfAttacks;
+        [field: SerializeField]public WeaponDataSO Data {get; private set;}
         [SerializeField] private float attackCounterResetCooldown;
 
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
-            private set => currentAttackCounter = value >= numberOfAttacks ? 0 : value; 
+            private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value; 
         }
 
         public event Action OnEnter;
@@ -22,7 +23,9 @@ namespace Etorium.Weapons
         public GameObject BaseGameObject {get; private set;}
         public GameObject WeaponSpriteGameObject {get; private set;}
         
-        private AnimationEventHandler eventHandler;
+        public AnimationEventHandler EventHandler {get; private set;}
+        
+        public Core Core {get; private set;}
 
         private int currentAttackCounter;
 
@@ -38,6 +41,11 @@ namespace Etorium.Weapons
             anim.SetInteger("counter", CurrentAttackCounter);
             
             OnEnter?.Invoke();
+        }
+
+        public void SetCore(Core core)
+        {
+            Core = core;
         }
 
         private void Exit()
@@ -56,7 +64,7 @@ namespace Etorium.Weapons
             WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
             anim = BaseGameObject.GetComponent<Animator>();
 
-            eventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
+            EventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
 
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
         }
@@ -70,13 +78,13 @@ namespace Etorium.Weapons
 
         private void OnEnable()
         {
-            eventHandler.OnFinish += Exit;
+            EventHandler.OnFinish += Exit;
             attackCounterResetTimer.OnTimerDone += ResetAtackCounter;
         }
 
         private void OnDisable()
         {
-            eventHandler.OnFinish -= Exit;
+            EventHandler.OnFinish -= Exit;
             attackCounterResetTimer.OnTimerDone -= ResetAtackCounter;
 
         }

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0afafe3154a545aeb3a2d29b89102501, type: 3}
+  m_Name: Sword_1
+  m_EditorClassIdentifier: 
+  <NumberOfAttacks>k__BackingField: 3
+  <ComponentData>k__BackingField:
+  - rid: 8921465091188588650
+  - rid: 8921465091188588656
+  - rid: 8921465116076802192
+  references:
+    version: 2
+    RefIds:
+    - rid: 8921465091188588650
+      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - <Sprites>k__BackingField:
+          - {fileID: -1780751373, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 577957028, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: -509565249, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 680478193, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 365328359, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+        - <Sprites>k__BackingField:
+          - {fileID: 1469980136, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 1160239679, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: -1537962721, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 342834816, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 683960273, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+        - <Sprites>k__BackingField:
+          - {fileID: -84422829, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: -1669289994, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: -312529561, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: -1032906865, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+          - {fileID: 621078435, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+    - rid: 8921465091188588656
+      type: {class: MovementData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 3
+        - <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 4
+        - <Direction>k__BackingField: {x: 1, y: 5}
+          <Velocity>k__BackingField: 5
+    - rid: 8921465116076802192
+      type: {class: ActionHitBoxData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        <AttackData>k__BackingField:
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -1.01
+            width: 1.6
+            height: 1.7
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -0.83
+            width: 1.65
+            height: 1.7
+        - Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.3
+            y: -0.83
+            width: 1.55
+            height: 2.35
+        <DetectedLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512

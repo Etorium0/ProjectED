@@ -1,17 +1,16 @@
 ﻿using System;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
-    public class WeaponSprite : WeaponComponent
+    public class WeaponSprite : WeaponComponent<WeaponSpriteData, AttackSprites>
     {
         private SpriteRenderer baseSpriteRenderer;
         private SpriteRenderer weaponSpriteRenderer;
-
-        [SerializeField] private WeaponSprites[] weaponSprites;
-
+        
         private int currentWeaponSpriteIndex;
-
+        
         protected override void HandleEnter()
         {
             base.HandleEnter();
@@ -27,7 +26,7 @@ namespace Etorium.Weapons.Components
                 return;
             }
 
-            var currentAttackSprite = weaponSprites[weapon.CurrentAttackCounter].Sprites;
+            var currentAttackSprite = currentAttackData.Sprites;
 
             if (currentWeaponSpriteIndex >= currentAttackSprite.Length)
             {
@@ -69,12 +68,5 @@ namespace Etorium.Weapons.Components
             
             weapon.OnEnter -= HandleEnter;
         }
-    }
-    
-    [Serializable] 
-
-    public class WeaponSprites
-    {
-        [field: SerializeField] public Sprite[] Sprites { get; private set;}
     }
 }

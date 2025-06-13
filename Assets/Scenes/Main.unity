@@ -1564,7 +1564,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.08235294, g: 0.08235294, b: 0.08235294, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -44715,25 +44715,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a458ba5ed0d8440ea1febf9afea53aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSprites:
-  - <Sprites>k__BackingField:
-    - {fileID: -1420518866, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -1505483480, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 2084821773, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 521349678, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 1335786267, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-  - <Sprites>k__BackingField:
-    - {fileID: -809262849, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -42819579, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 1645220379, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -837185620, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 1231312736, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-  - <Sprites>k__BackingField:
-    - {fileID: -134458099, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -93232612, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -32343913, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: -1451863314, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-    - {fileID: 1661298058, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
+--- !u!114 &1780144480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557070217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f248544564470fb0ac632cc7d0c7b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1780144481
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1557070217}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6028d1f5ff94fb6979762d53d4294d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1785562552
 GameObject:
   m_ObjectHideFlags: 0
@@ -45152,25 +45157,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a458ba5ed0d8440ea1febf9afea53aca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponSprites:
-  - <Sprites>k__BackingField:
-    - {fileID: -1780751373, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 577957028, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: -509565249, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 680478193, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 365328359, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-  - <Sprites>k__BackingField:
-    - {fileID: 1469980136, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 1160239679, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: -1537962721, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 342834816, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 683960273, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-  - <Sprites>k__BackingField:
-    - {fileID: -84422829, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: -1669289994, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: -312529561, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: -1032906865, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - {fileID: 621078435, guid: 3179c16b297295440b9749aff89377e2, type: 3}
+--- !u!114 &2101740446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370192224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c0f248544564470fb0ac632cc7d0c7b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &2101740447
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370192224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6028d1f5ff94fb6979762d53d4294d8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2105771700
 GameObject:
   m_ObjectHideFlags: 0
@@ -45303,6 +45313,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037866840169384086, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
         type: 3}
+      propertyPath: <Data>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: e4b1d53b0a71b5142884e00633a2f9d4,
+        type: 2}
+    - target: {fileID: 5037866840169384086, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
       propertyPath: attackCounterResetCooldown
       value: 2
       objectReference: {fileID: 0}
@@ -45319,6 +45335,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1780144478}
+    - targetCorrespondingSourceObject: {fileID: 5347446869373260371, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1780144480}
+    - targetCorrespondingSourceObject: {fileID: 5347446869373260371, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1780144481}
   m_SourcePrefab: {fileID: 100100000, guid: 09ad0fb67dd07c849958ce1a5b26b0ca, type: 3}
 --- !u!1001 &2579993880090268338
 PrefabInstance:
@@ -45390,6 +45414,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5037866840169384086, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
         type: 3}
+      propertyPath: <Data>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: daf6e6868098d0546ac2c156fb2eed52,
+        type: 2}
+    - target: {fileID: 5037866840169384086, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
       propertyPath: attackCounterResetCooldown
       value: 2
       objectReference: {fileID: 0}
@@ -45411,6 +45441,14 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 2101740444}
+    - targetCorrespondingSourceObject: {fileID: 5347446869373260371, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2101740446}
+    - targetCorrespondingSourceObject: {fileID: 5347446869373260371, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2101740447}
   m_SourcePrefab: {fileID: 100100000, guid: 09ad0fb67dd07c849958ce1a5b26b0ca, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

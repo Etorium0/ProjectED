@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using Etorium.CoreSystem;
 using TMPro;
 using UnityEngine;
 
