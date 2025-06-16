@@ -1,10 +1,10 @@
 ﻿namespace Etorium.Weapons.Components
 {
-    public class DamageData : ComponentData<AttackDamage>
+    public class KnockBackData : ComponentData<AttackKnockBack>
     {
         protected override void SetComponentDependency()
         {
-            ComponentDependency = typeof(Damage);
+            ComponentDependency = typeof(KnockBack);
         }
     }
 }
