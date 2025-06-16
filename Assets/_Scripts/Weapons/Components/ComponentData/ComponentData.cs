@@ -8,6 +8,8 @@ namespace Etorium.Weapons.Components
     {
         [SerializeField, HideInInspector] private string name;
 
+        public Type ComponentDependency { get; protected set; }
+
         public ComponentData()
         {
             SetComponentName();

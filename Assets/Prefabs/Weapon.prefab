@@ -220,6 +220,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1398328418323785778}
   - component: {fileID: 5037866840169384086}
+  - component: {fileID: 1127812380536526217}
   m_Layer: 11
   m_Name: Weapon
   m_TagString: Untagged
@@ -256,5 +257,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f667727d52041cd8932bca9211dbd1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfAttacks: 0
   attackCounterResetCooldown: 0
+--- !u!114 &1127812380536526217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5347446869373260371}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1cf40f47e2d8437ab98abd1a23a111a2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapon: {fileID: 5037866840169384086}
+  data: {fileID: 0}

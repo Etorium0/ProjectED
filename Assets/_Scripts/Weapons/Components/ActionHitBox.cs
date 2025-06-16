@@ -34,18 +34,14 @@ namespace Etorium.Weapons.Components
             base.Start();
 
             movement = new CoreComp<CoreSystem.Movement>(Core);
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+            
             eventHandler.OnAttackAction += HandleAttackAction;
         }
 
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
             eventHandler.OnAttackAction -= HandleAttackAction;
+            base.OnDestroy();
         }
 
         private void OnDrawGizmosSelected()

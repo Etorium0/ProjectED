@@ -39,34 +39,23 @@ namespace Etorium.Weapons.Components
             currentWeaponSpriteIndex++;
         }
 
-        protected override void Awake()
+        protected override void Start()
         {
-            base.Awake();
+            base.Start();
             
-            baseSpriteRenderer = transform.Find("Base").GetComponent<SpriteRenderer>();
-            weaponSpriteRenderer = transform.Find("WeaponSprite").GetComponent<SpriteRenderer>();
+            baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
+            weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();
             
-            // TODO: Fix this when have weapon data (WeaponSprite phụ thuộc vào Weapon để lấy gameObject nên nếu awake này được gọi trước weapon.Awake sẽ lõi nullrefer
-            // baseSpriteRenderer = weapon.BaseGameObject.GetComponent<SpriteRenderer>();
-            // weaponSpriteRenderer = weapon.WeaponSpriteGameObject.GetComponent<SpriteRenderer>();
-        }
-
-        protected override void OnEnable()
-        {
-            base.OnEnable();
+            data = weapon.Data.GetData<WeaponSpriteData>();
             
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
-            
-            weapon.OnEnter += HandleEnter;
         }
 
-        protected override void OnDisable()
+        protected override void OnDestroy()
         {
-            base.OnDisable();
+            base.OnDestroy();
             
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
-            
-            weapon.OnEnter -= HandleEnter;
         }
     }
 }

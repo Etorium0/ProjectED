@@ -17,26 +17,31 @@ MonoBehaviour:
   - rid: 8921465091188588653
   - rid: 8921465091188588657
   - rid: 8921465116076802133
+  - rid: 8921465203774193734
   references:
     version: 2
     RefIds:
     - rid: 8921465091188588653
       type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
       data:
+        name: WeaponSpriteData
         attackData:
-        - <Sprites>k__BackingField:
+        - name: Attack 1
+          <Sprites>k__BackingField:
           - {fileID: -1420518866, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: -1505483480, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: 2084821773, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: 521349678, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: 1335786267, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-        - <Sprites>k__BackingField:
+        - name: Attack 2
+          <Sprites>k__BackingField:
           - {fileID: -809262849, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: -42819579, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: 1645220379, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: -837185620, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: 1231312736, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
-        - <Sprites>k__BackingField:
+        - name: Attack 3
+          <Sprites>k__BackingField:
           - {fileID: -134458099, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: -93232612, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
           - {fileID: -32343913, guid: 3f6ae8b3fa4b36e48b63b3edc225fda0, type: 3}
@@ -45,32 +50,40 @@ MonoBehaviour:
     - rid: 8921465091188588657
       type: {class: MovementData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
       data:
+        name: MovementData
         attackData:
-        - <Direction>k__BackingField: {x: 1, y: 0}
+        - name: Attack 1
+          <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 3
-        - <Direction>k__BackingField: {x: 1, y: 0}
+        - name: Attack 2
+          <Direction>k__BackingField: {x: 1, y: 0}
           <Velocity>k__BackingField: 4
-        - <Direction>k__BackingField: {x: 1, y: 5}
+        - name: Attack 3
+          <Direction>k__BackingField: {x: 1, y: 5}
           <Velocity>k__BackingField: 5
     - rid: 8921465116076802133
       type: {class: ActionHitBoxData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
       data:
+        name: ActionHitBoxData
         attackData:
-        - Debug: 0
+        - name: Attack 1
+          Debug: 0
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.3
             y: -1.01
             width: 1.6
             height: 1.7
-        - Debug: 0
+        - name: Attack 2
+          Debug: 0
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.3
             y: -0.83
             width: 1.65
             height: 1.7
-        - Debug: 0
+        - name: Attack 3
+          Debug: 0
           <HitBox>k__BackingField:
             serializedVersion: 2
             x: 0.3
@@ -80,3 +93,14 @@ MonoBehaviour:
         <DetectedLayers>k__BackingField:
           serializedVersion: 2
           m_Bits: 512
+    - rid: 8921465203774193734
+      type: {class: DamageData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 5
+        - name: Attack 2
+          <Amount>k__BackingField: 10
+        - name: Attack 3
+          <Amount>k__BackingField: 15
