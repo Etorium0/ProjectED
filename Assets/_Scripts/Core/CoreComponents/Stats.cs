@@ -1,39 +1,32 @@
 ﻿using System;
+using Etorium.CoreSystem.StatsSystem;
 using UnityEngine;
 
 namespace Etorium.CoreSystem
 {
     public class Stats : CoreComponent
     {
-        public event Action OnHealthZero;
-    
-        [SerializeField] private float maxHealth;
-        private float currentHealth;
+        [field: SerializeField] public Stat Health { get; private set; }
+        [field: SerializeField] public Stat Poise { get; private set; }
 
+        [SerializeField] private float PoiseRecoveryRate;
+        
         protected override void Awake()
         {
             base.Awake();
-
-            currentHealth = maxHealth;
+            
+            Health.Init();
+            Poise.Init();
         }
 
-        public void DecreaseHealth(float amount)
+        private void Update()
         {
-            currentHealth -= amount;
-
-            if(currentHealth <= 0)
+            if (Poise.CurrentValue.Equals(Poise.MaxValue))
             {
-                currentHealth = 0;
-            
-                OnHealthZero?.Invoke();
-            
-                Debug.Log("Health is zero!!");
+                return;
             }
-        }
-
-        public void IncreaseHealth(float amount)
-        {
-            currentHealth = Mathf.Clamp(currentHealth + amount, 0, maxHealth);
+            
+            Poise.Increase(PoiseRecoveryRate * Time.deltaTime);
         }
     }
 }
