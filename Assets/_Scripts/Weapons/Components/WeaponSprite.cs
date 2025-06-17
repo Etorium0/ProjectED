@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Etorium.Weapons.Components;
 using UnityEngine;
 
@@ -11,11 +12,20 @@ namespace Etorium.Weapons.Components
         
         private int currentWeaponSpriteIndex;
         
+        private Sprite[] currentPhaseSprites;
+        
         protected override void HandleEnter()
         {
             base.HandleEnter();
             
             currentWeaponSpriteIndex = 0;
+        }
+
+        private void HandleEnterAttackPhases(AttackPhases phase)
+        {
+            currentWeaponSpriteIndex = 0;
+            
+            currentPhaseSprites = currentAttackData.PhaseSprites.FirstOrDefault(data => data.Phase == phase).Sprites;
         }
         
         private void HandleBaseSpriteChange(SpriteRenderer sr)
@@ -25,16 +35,14 @@ namespace Etorium.Weapons.Components
                 weaponSpriteRenderer.sprite = null;
                 return;
             }
-
-            var currentAttackSprite = currentAttackData.Sprites;
-
-            if (currentWeaponSpriteIndex >= currentAttackSprite.Length)
+            
+            if (currentWeaponSpriteIndex >= currentPhaseSprites.Length)
             {
                 Debug.LogWarning($"{weapon.name} weapon sprites length mismatch");
                 return;
             }
             
-            weaponSpriteRenderer.sprite = currentAttackSprite[currentWeaponSpriteIndex];
+            weaponSpriteRenderer.sprite = currentPhaseSprites[currentWeaponSpriteIndex];
 
             currentWeaponSpriteIndex++;
         }
@@ -49,6 +57,8 @@ namespace Etorium.Weapons.Components
             data = weapon.Data.GetData<WeaponSpriteData>();
             
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
+
+            eventHandler.OnEnterAttackPhase += HandleEnterAttackPhases;
         }
 
         protected override void OnDestroy()
@@ -56,6 +66,8 @@ namespace Etorium.Weapons.Components
             base.OnDestroy();
             
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
+
+            eventHandler.OnEnterAttackPhase -= HandleEnterAttackPhases;
         }
     }
 }
