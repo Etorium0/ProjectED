@@ -10,10 +10,14 @@ namespace Etorium.Weapons
     {
         public event Action<bool> OnCurrentInputChange;
         
+        public event Action OnEnter;
+        public event Action OnExit;
+        public event Action OnUseInput;
+        
         [SerializeField] private float attackCounterResetCooldown;
 
         public WeaponDataSO Data { get; private set; }
-
+        
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
@@ -33,31 +37,29 @@ namespace Etorium.Weapons
             }
         }
 
-        public event Action OnEnter;
-        public event Action OnExit;
         
         private Animator anim;
-        public GameObject BaseGameObject {get; private set;}
-        public GameObject WeaponSpriteGameObject {get; private set;}
+        public GameObject BaseGameObject { get; private set; }
+        public GameObject WeaponSpriteGameObject { get; private set; }
         
-        public AnimationEventHandler EventHandler {get; private set;}
+        public AnimationEventHandler EventHandler { get; private set; }
         
-        public Core Core {get; private set;}
+        public Core Core { get; private set; }
 
         private int currentAttackCounter;
 
         private Timer attackCounterResetTimer;
-        
+
         private bool currentInput;
         
         public void Enter()
-        {
+        {            
             print($"{transform.name} enter");
             
             attackCounterResetTimer.StopTimer();
             
             anim.SetBool("active", true);
-            anim.SetInteger("counter", CurrentAttackCounter);
+            anim.SetInteger("counter", currentAttackCounter);
             
             OnEnter?.Invoke();
         }
@@ -75,7 +77,7 @@ namespace Etorium.Weapons
         private void Exit()
         {
             anim.SetBool("active", false);
-            
+
             CurrentAttackCounter++;
             attackCounterResetTimer.StartTimer();
             
@@ -86,6 +88,7 @@ namespace Etorium.Weapons
         {
             BaseGameObject = transform.Find("Base").gameObject;
             WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
+            
             anim = BaseGameObject.GetComponent<Animator>();
 
             EventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
@@ -93,24 +96,32 @@ namespace Etorium.Weapons
             attackCounterResetTimer = new Timer(attackCounterResetCooldown);
         }
 
-        public void Update()
+        private void Update()
         {
             attackCounterResetTimer.Tick();
         }
 
-        private void ResetAtackCounter() => CurrentAttackCounter = 0;
+        private void ResetAttackCounter()
+        {
+            print("Reset Attack Counter");
+            CurrentAttackCounter = 0;
+        }
 
         private void OnEnable()
         {
             EventHandler.OnFinish += Exit;
-            attackCounterResetTimer.OnTimerDone += ResetAtackCounter;
+            EventHandler.OnUseInput += HandleUseInput;
+            attackCounterResetTimer.OnTimerDone += ResetAttackCounter;
         }
 
         private void OnDisable()
         {
             EventHandler.OnFinish -= Exit;
-            attackCounterResetTimer.OnTimerDone -= ResetAtackCounter;
-
+            EventHandler.OnUseInput -= HandleUseInput;
+            attackCounterResetTimer.OnTimerDone -= ResetAttackCounter;
         }
+
+        // Invokes event to pass along information from the AnimationEventHandler to a non-weapon class.
+        private void HandleUseInput() => OnUseInput?.Invoke();
     }
 }
