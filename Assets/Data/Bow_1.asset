@@ -14,8 +14,34 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 1089e6ad3ab9c034382f2409dbcddd6c,
     type: 2}
-  <NumberOfAttacks>k__BackingField: 0
-  <ComponentData>k__BackingField: []
+  <NumberOfAttacks>k__BackingField: 1
+  <ComponentData>k__BackingField:
+  - rid: 8921465226768416849
+  - rid: 8921465229095469117
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 8921465226768416849
+      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: WeaponSpriteData
+        attackData:
+        - name: Attack 1
+          <PhaseSprites>k__BackingField:
+          - <Phase>k__BackingField: 0
+            <Sprites>k__BackingField:
+            - {fileID: -360618936, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+            - {fileID: 1736220405, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+          - <Phase>k__BackingField: 1
+            <Sprites>k__BackingField:
+            - {fileID: 1736220405, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+          - <Phase>k__BackingField: 2
+            <Sprites>k__BackingField:
+            - {fileID: 1296656621, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+            - {fileID: -1283868207, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+            - {fileID: 1236258007, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+            - {fileID: -1815128578, guid: 8f07a39de0d02784e8b263b4d66d7956, type: 3}
+    - rid: 8921465229095469117
+      type: {class: InputHoldData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: InputHoldData

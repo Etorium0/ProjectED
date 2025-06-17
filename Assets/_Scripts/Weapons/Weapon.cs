@@ -1,12 +1,15 @@
 using System;
 using Etorium.CoreSystem;
 using Etorium.Utilities;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons
 {
     public class Weapon : MonoBehaviour
     {
+        public event Action<bool> OnCurrentInputChange;
+        
         [SerializeField] private float attackCounterResetCooldown;
 
         public WeaponDataSO Data { get; private set; }
@@ -15,6 +18,19 @@ namespace Etorium.Weapons
         {
             get => currentAttackCounter;
             private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value; 
+        }
+
+        public bool CurrentInput
+        {
+            get => currentInput;
+            set
+            {
+                if (currentInput != value)
+                {
+                    currentInput = value;
+                    OnCurrentInputChange?.Invoke(currentInput);
+                }
+            }
         }
 
         public event Action OnEnter;
@@ -31,6 +47,8 @@ namespace Etorium.Weapons
         private int currentAttackCounter;
 
         private Timer attackCounterResetTimer;
+        
+        private bool currentInput;
         
         public void Enter()
         {
