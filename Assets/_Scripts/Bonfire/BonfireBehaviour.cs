@@ -15,24 +15,22 @@ public class BonfireBehaviour : MonoBehaviour
 
     private bool inRange;
     private bool tooClose;
-    private bool isResting;
 
-    public Core core {get; private set;}
-    public Stats stats {get; private set;}
-    public Movement movement {get; private set;}
-    public Animator anim {get; private set;}
-    public AudioManager audioManager {get; private set;}
-    public PlayerInputHandler InputHandler { get; private set; }
+    public Core core { get; private set; }
+    public Stats stats { get; private set; }
+    public Movement movement { get; private set; }
+    public Animator anim { get; private set; }
+    public AudioManager audioManager { get; private set; }
+    public Player player { get; private set; }
 
     void Start()
     {
-        // Lấy Core từ player (giả sử BonfireBehaviour gắn vào player)
         core = GetComponentInChildren<Core>();
         stats = core.GetCoreComponent<Stats>();
         movement = core.GetCoreComponent<Movement>();
         anim = GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-        InputHandler = GetComponent<PlayerInputHandler>();
+        player = GetComponent<Player>();
 
         if (lastBonfireCloseTo == null)
             lastBonfireCloseTo = defaultBonfire;
@@ -40,22 +38,16 @@ public class BonfireBehaviour : MonoBehaviour
             lastBonfireRestedAt = defaultBonfire;
 
         bonfireRestText.SetText("");
-
-        isResting = true;
-        SetPlayerImmobile();
-
-        restAtBonfire(defaultBonfire);
     }
 
     void Update()
     {
-        CheckPlayerRest();
+        UpdateBonfireText();
     }
 
-    void CheckPlayerRest()
+    void UpdateBonfireText()
     {
-        // Nếu có trạng thái chết/dash thì return (tùy bạn muốn quản lý ở đâu)
-        // if (isDead || isDashing) return;
+        bool isResting = IsPlayerResting();
 
         if (!inRange || tooClose)
         {
@@ -65,36 +57,20 @@ public class BonfireBehaviour : MonoBehaviour
         {
             bonfireRestText.SetText("PRESS Q TO REST");
         }
-
-        if (isResting)
+        else
         {
             bonfireRestText.SetText("PRESS Q TO GET UP");
         }
-
-        if (InputHandler.RestInput && (inRange || isResting))
-        {
-            if (!isResting)
-            {
-                restAtBonfire(lastBonfireCloseTo);
-            }
-            else
-            {
-                bonfireRestText.SetText("PRESS Q TO REST");
-                SetPlayerMobile();
-                isResting = false;
-            }
-        }
-
-        if (anim != null)
-            anim.SetBool("Resting", isResting);
     }
 
-    public void restAtBonfire(GameObject bonfire)
+    // Hàm gọi khi muốn rest (ví dụ gọi từ PlayerState hoặc input handler)
+    public void RestAtBonfire(GameObject bonfire)
     {
-        // Hồi máu
         stats.Health.CurrentValue = stats.Health.MaxValue;
-
-        SetPlayerImmobile();
+        if (player != null && player.RestState != null)
+        {
+            player.StateMachine.ChangeState(player.RestState);
+        }
 
         // Xoay mặt về phía bonfire
         if (bonfire.transform.position.x < transform.position.x)
@@ -108,25 +84,13 @@ public class BonfireBehaviour : MonoBehaviour
                 movement.Flip();
         }
 
-        isResting = true;
-        bonfireRestText.SetText("PRESS Q TO GET UP");
         lastBonfireRestedAt = bonfire;
-        if (anim != null)
-            anim.SetBool("Resting", true);
         bonfireUsedEvent.Invoke();
     }
 
-    private void SetPlayerImmobile()
+    public bool IsPlayerResting()
     {
-        movement.CanSetVelocity = false;
-        movement.SetVelocityZero();
-        // Nếu có input handler thì disable input ở đây
-    }
-
-    private void SetPlayerMobile()
-    {
-        movement.CanSetVelocity = true;
-        // Nếu có input handler thì enable input ở đây
+        return player != null && player.StateMachine.CurrentState == player.RestState;
     }
 
     void OnTriggerEnter2D(Collider2D collision)

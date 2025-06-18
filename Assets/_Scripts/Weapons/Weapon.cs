@@ -103,7 +103,7 @@ namespace Etorium.Weapons
 
         private void ResetAttackCounter()
         {
-            print("Reset Attack Counter");
+            // print("Reset Attack Counter");
             CurrentAttackCounter = 0;
         }
 
