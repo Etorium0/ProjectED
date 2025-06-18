@@ -164,7 +164,6 @@ public class PlayerInputHandler : MonoBehaviour
     public void UseJumpInput() => JumpInput = false;
 
     public void UseDashInput() => DashInput = false;
-    public void UseEscapeInput() => EscapeInput = false;
     public void UseRestInput() => RestInput = false;
 
     // Used to set the specific attack input back to false. Usually passed through the player attack state from an animation event.

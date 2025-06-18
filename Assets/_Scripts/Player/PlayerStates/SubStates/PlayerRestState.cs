@@ -8,7 +8,6 @@ public class PlayerRestState : PlayerState
     public override void Enter()
     {
         base.Enter();
-        player.Anim.SetBool("rest", true);
         player.RB.linearVelocity = Vector2.zero; // Sửa lại thành velocity thay vì linearVelocity (Unity dùng velocity)
         player.InputHandler.UseRestInput(); // Reset luôn khi vào
     }
@@ -16,7 +15,6 @@ public class PlayerRestState : PlayerState
     public override void Exit()
     {
         base.Exit();
-        player.Anim.SetBool("rest", false);
     }
 
     public override void LogicUpdate()
