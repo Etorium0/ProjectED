@@ -17,20 +17,22 @@ public class BonfireBehaviour : MonoBehaviour
     private bool tooClose;
     private bool isResting;
 
-    private Core core;
-    private Stats stats;
-    private Movement movement;
-    private Animator anim;
-    private AudioManager audioManager;
+    public Core core {get; private set;}
+    public Stats stats {get; private set;}
+    public Movement movement {get; private set;}
+    public Animator anim {get; private set;}
+    public AudioManager audioManager {get; private set;}
+    public PlayerInputHandler InputHandler { get; private set; }
 
     void Start()
     {
         // Lấy Core từ player (giả sử BonfireBehaviour gắn vào player)
-        core = GetComponentInParent<Core>();
+        core = GetComponentInChildren<Core>();
         stats = core.GetCoreComponent<Stats>();
         movement = core.GetCoreComponent<Movement>();
-        anim = GetComponentInParent<Animator>();
+        anim = GetComponent<Animator>();
         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
+        InputHandler = GetComponent<PlayerInputHandler>();
 
         if (lastBonfireCloseTo == null)
             lastBonfireCloseTo = defaultBonfire;
@@ -69,7 +71,7 @@ public class BonfireBehaviour : MonoBehaviour
             bonfireRestText.SetText("PRESS Q TO GET UP");
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && (inRange || isResting))
+        if (InputHandler.RestInput && (inRange || isResting))
         {
             if (!isResting)
             {

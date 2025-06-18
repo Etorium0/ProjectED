@@ -19,6 +19,8 @@ public class PlayerInputHandler : MonoBehaviour
     public bool GrabInput { get; private set; }
     public bool DashInput { get; private set; }
     public bool DashInputStop { get; private set; }
+    public bool RestInput { get; private set; }
+    public bool EscapeInput { get; private set; }
 
     public bool[] AttackInputs { get; private set; }
 
@@ -75,8 +77,8 @@ public class PlayerInputHandler : MonoBehaviour
         RawMovementInput = context.ReadValue<Vector2>();
 
         NormInputX = Mathf.RoundToInt(RawMovementInput.x);
-        NormInputY = Mathf.RoundToInt(RawMovementInput.y);       
-        
+        NormInputY = Mathf.RoundToInt(RawMovementInput.y);
+
     }
 
     public void OnJumpInput(InputAction.CallbackContext context)
@@ -125,12 +127,38 @@ public class PlayerInputHandler : MonoBehaviour
     {
         RawDashDirectionInput = context.ReadValue<Vector2>();
 
-        if(playerInput.currentControlScheme == "Keyboard")
+        if (playerInput.currentControlScheme == "Keyboard")
         {
             RawDashDirectionInput = cam.ScreenToWorldPoint((Vector3)RawDashDirectionInput) - transform.position;
         }
 
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
+    }
+
+    public void OnRestInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            RestInput = true;
+        }
+
+        if (context.canceled)
+        {
+            RestInput = false;
+        }
+    }
+
+    public void OnEscapeInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            EscapeInput = true;
+        }
+
+        if (context.canceled)
+        {
+            EscapeInput = false;
+        }
     }
 
     public void UseJumpInput() => JumpInput = false;
@@ -142,7 +170,7 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void CheckJumpInputHoldTime()
     {
-        if(Time.time >= jumpInputStartTime + inputHoldTime)
+        if (Time.time >= jumpInputStartTime + inputHoldTime)
         {
             JumpInput = false;
         }
@@ -150,11 +178,15 @@ public class PlayerInputHandler : MonoBehaviour
 
     private void CheckDashInputHoldTime()
     {
-        if(Time.time >= dashInputStartTime + inputHoldTime)
+        if (Time.time >= dashInputStartTime + inputHoldTime)
         {
             DashInput = false;
         }
     }
+    
+    public void UseEscapeInput() => EscapeInput = false;
+
+
 }
 
 public enum CombatInputs
