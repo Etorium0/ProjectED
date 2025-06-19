@@ -1,4 +1,5 @@
-﻿using Etorium.Interfaces;
+﻿using Etorium.Combat.PoiseDamage;
+using Etorium.Interfaces;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
@@ -13,7 +14,7 @@ namespace Etorium.Weapons.Components
             {
                 if (item.TryGetComponent(out IPoiseDamageable poiseDamageable))
                 {
-                    poiseDamageable.DamagePoise(currentAttackData.Amount);
+                    poiseDamageable.DamagePoise(new Etorium.Combat.PoiseDamage.PoiseDamageData(currentAttackData.Amount, Core.Root));
                 }
             }
         }
@@ -21,16 +22,16 @@ namespace Etorium.Weapons.Components
         protected override void Start()
         {
             base.Start();
-            
+
             hitBox = GetComponent<ActionHitBox>();
-            
+
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            
+
             hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
         }
     }

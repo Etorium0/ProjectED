@@ -4,6 +4,9 @@
     {
         Anticipation,
         Idle,
-        Action
+        Action,
+        Cancel,
+        Break,
+        Parry
     }
 }

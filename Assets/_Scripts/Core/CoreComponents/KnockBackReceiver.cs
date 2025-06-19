@@ -1,45 +1,55 @@
-﻿using UnityEngine;
+﻿using Etorium.Combat.KnockBack;
+using Etorium.ModifierSystem;
+using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Etorium.CoreSystem
 {
-	public class KnockBackReceiver : CoreComponent, IKnockBackable
-	{
-		[SerializeField] private float maxKnockBackTime = 0.2f;
+    public class KnockBackReceiver : CoreComponent, IKnockBackable
+    {
+        public Modifiers<Modifier<KnockBackData>, KnockBackData> Modifiers { get; } = new();
 
-		private bool isKnockBackActive;
-		private float knockBackStartTime;
-		
-		private CoreComp<Movement> movement;
-		private CoreComp<CollisionSenses> collisionSenses;
+        [SerializeField] private float maxKnockBackTime = 0.2f;
 
-		public override void LogicUpdate() {
-			CheckKnockBack();
-		}
+        private bool isKnockBackActive;
+        private float knockBackStartTime;
 
-		public void KnockBack(Vector2 angle, float strength, int direction) {
-			movement.Comp?.SetVelocity(strength, angle, direction);
-			movement.Comp.CanSetVelocity = false;
-			isKnockBackActive = true;
-			knockBackStartTime = Time.time;
-		}
+        private Movement movement;
+        private CollisionSenses collisionSenses;
 
-		private void CheckKnockBack() {
-			if (isKnockBackActive
-			    && ((movement.Comp?.CurrentVelocity.y <= 0.01f && collisionSenses.Comp.Ground)
-			        || Time.time >= knockBackStartTime + maxKnockBackTime)
-			   ) {
-				isKnockBackActive = false;
-				movement.Comp.CanSetVelocity = true;
-			}
-		}
+        public override void LogicUpdate()
+        {
+            CheckKnockBack();
+        }
 
-		protected override void Awake()
-		{
-			base.Awake();
-			
-			movement = new CoreComp<Movement>(core);
-			collisionSenses = new CoreComp<CollisionSenses>(core);
-		}
-	}
+        public void KnockBack(KnockBackData data)
+        {
+            data = Modifiers.ApplyAllModifiers(data);
+            
+            movement.SetVelocity(data.Strength, data.Angle, data.Direction);
+            movement.CanSetVelocity = false;
+            isKnockBackActive = true;
+            knockBackStartTime = Time.time;
+        }
+
+        private void CheckKnockBack()
+        {
+            if (isKnockBackActive
+                && ((movement.CurrentVelocity.y <= 0.01f && collisionSenses.Ground)
+                    || Time.time >= knockBackStartTime + maxKnockBackTime)
+               )
+            {
+                isKnockBackActive = false;
+                movement.CanSetVelocity = true;
+            }
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            movement = core.GetCoreComponent<Movement>();
+            collisionSenses = core.GetCoreComponent<CollisionSenses>();
+        }
+    }
 }

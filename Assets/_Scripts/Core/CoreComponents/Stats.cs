@@ -6,10 +6,10 @@ namespace Etorium.CoreSystem
 {
     public class Stats : CoreComponent
     {
-        [field: SerializeField] public Stat Health { get; private set; }
-        [field: SerializeField] public Stat Poise { get; private set; }
+       [field: SerializeField] public Stat Health { get; private set; }
+       [field: SerializeField] public Stat Poise { get; private set; }
 
-        [SerializeField] private float PoiseRecoveryRate;
+       [SerializeField] private float poiseRecoveryRate;
         
         protected override void Awake()
         {
@@ -22,11 +22,9 @@ namespace Etorium.CoreSystem
         private void Update()
         {
             if (Poise.CurrentValue.Equals(Poise.MaxValue))
-            {
                 return;
-            }
             
-            Poise.Increase(PoiseRecoveryRate * Time.deltaTime);
+            Poise.Increase(poiseRecoveryRate * Time.deltaTime);
         }
     }
 }

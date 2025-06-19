@@ -4,11 +4,11 @@ namespace Etorium.CoreSystem
 {
     public class CoreComponent : MonoBehaviour, ILogicUpdate
     {
-        protected CoreSystem.Core core;
+        protected Core core;
 
         protected virtual void Awake()
         {
-            core = transform.parent.GetComponent<CoreSystem.Core>();
+            core = transform.parent.GetComponent<Core>();
 
             if(core == null) { Debug.LogError("There is no Core on the parent"); }
             core.AddComponent(this);

@@ -8,7 +8,7 @@ namespace Etorium.Weapons.Components
     {
         public event Action<Collider2D[]> OnDetectedCollider2D;
 
-        private CoreComp<CoreSystem.Movement> movement;
+        private CoreComp<Etorium.CoreSystem.Movement> movement;
 
         private Vector2 offset;
 
@@ -21,7 +21,7 @@ namespace Etorium.Weapons.Components
                 transform.position.y + currentAttackData.HitBox.center.y
             );
 
-            detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectedLayers);
+            detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectableLayers);
 
             if (detected.Length == 0)
                 return;
@@ -33,15 +33,15 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            movement = new CoreComp<CoreSystem.Movement>(Core);
+            movement = new CoreComp<Etorium.CoreSystem.Movement>(Core);
             
-            eventHandler.OnAttackAction += HandleAttackAction;
+            AnimationEventHandler.OnAttackAction += HandleAttackAction;
         }
 
         protected override void OnDestroy()
         {
-            eventHandler.OnAttackAction -= HandleAttackAction;
             base.OnDestroy();
+            AnimationEventHandler.OnAttackAction -= HandleAttackAction;
         }
 
         private void OnDrawGizmosSelected()
@@ -49,7 +49,7 @@ namespace Etorium.Weapons.Components
             if (data == null)
                 return;
 
-            foreach (var item in data.AttackData)
+            foreach (var item in data.GetAllAttackData())
             {
                 if (!item.Debug)
                     continue;

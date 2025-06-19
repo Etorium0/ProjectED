@@ -7,6 +7,5 @@ namespace Etorium.Weapons.Components
     public class AttackDamage : AttackData
     {
         [field: SerializeField] public float Amount { get; private set; }
-        
     }
 }

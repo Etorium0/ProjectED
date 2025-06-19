@@ -1,13 +1,12 @@
-﻿using Etorium.CoreSystem;
-using UnityEngine; 
-    
+﻿using UnityEngine;
+
 namespace Etorium.Weapons.Components
 {
     public class KnockBack : WeaponComponent<KnockBackData, AttackKnockBack>
     {
         private ActionHitBox hitBox;
-        
-        private CoreSystem.Movement movement;
+
+        private Etorium.CoreSystem.Movement movement;
 
         private void HandleDetectCollider2D(Collider2D[] colliders)
         {
@@ -15,28 +14,27 @@ namespace Etorium.Weapons.Components
             {
                 if (item.TryGetComponent(out IKnockBackable knockBackable))
                 {
-                    knockBackable.KnockBack
-                        (currentAttackData.Angle, currentAttackData.Strength, movement.FacingDirection);
+                    knockBackable.KnockBack(new Etorium.Combat.KnockBack.KnockBackData(currentAttackData.Angle,
+                        currentAttackData.Strength, movement.FacingDirection, Core.Root));
                 }
             }
-            
         }
 
         protected override void Start()
         {
             base.Start();
-            
+
             hitBox = GetComponent<ActionHitBox>();
-            
+
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
 
-            movement = Core.GetCoreComponent<CoreSystem.Movement>();
+            movement = Core.GetCoreComponent<Etorium.CoreSystem.Movement>();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            
+
             hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
         }
     }

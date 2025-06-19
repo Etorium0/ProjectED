@@ -55,20 +55,27 @@ public class Enemy2 : Entity
 
         stats.Poise.OnCurrentValueZero += HandlePoiseZero;
     }
-    
+
     private void HandlePoiseZero()
     {
         stateMachine.ChangeState(stunState);
     }
 
-    private void Start()
+    protected override void HandleParry()
     {
-        stateMachine.Initialize(moveState);        
+        base.HandleParry();
+        
+        stateMachine.ChangeState(stunState);
     }
 
     private void OnDestroy()
     {
         stats.Poise.OnCurrentValueZero -= HandlePoiseZero;
+    }
+
+    private void Start()
+    {
+        stateMachine.Initialize(moveState);        
     }
 
     public override void OnDrawGizmos()

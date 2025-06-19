@@ -50,12 +50,19 @@ public class Enemy1 : Entity
 
         stats.Poise.OnCurrentValueZero += HandlePoiseZero;
     }
-    
+
     private void HandlePoiseZero()
     {
         stateMachine.ChangeState(stunState);
     }
-    
+
+    protected override void HandleParry()
+    {
+        base.HandleParry();
+        
+        stateMachine.ChangeState(stunState);
+    }
+
     private void Start()
     {
         stateMachine.Initialize(moveState);        
