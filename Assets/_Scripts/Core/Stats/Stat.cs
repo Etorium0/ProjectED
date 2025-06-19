@@ -31,6 +31,11 @@ namespace Etorium.CoreSystem.StatsSystem
 
         public void Increase(float amount) => CurrentValue += amount;
 
-        public void Decrease(float amount) => CurrentValue -= amount;
+        public void Decrease(float amount)
+        {
+            Debug.Log("Current Health: " + CurrentValue);
+
+            CurrentValue -= amount;
+        }
     }
 }
