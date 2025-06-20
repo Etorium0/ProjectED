@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Etorium.ObjectPoolSystem;
-using Etorium.ProjectileSystem;
+using Bardent.ObjectPoolSystem;
+using Bardent.ProjectileSystem;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class ProjectileSpawner : WeaponComponent<ProjectileSpawnerData, AttackProjectileSpawner>
     {

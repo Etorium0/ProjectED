@@ -1,9 +1,9 @@
-﻿using Etorium.Utilities;
-using Etorium.ProjectileSystem.DataPackages;
+﻿using Bardent.ProjectileSystem.DataPackages;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /*
      * The KnockBack component is responsible for using information provided by the HitBox component via an event

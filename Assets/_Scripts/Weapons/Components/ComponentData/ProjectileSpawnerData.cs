@@ -1,4 +1,4 @@
-﻿namespace Etorium.Weapons.Components
+﻿namespace Bardent.Weapons.Components
 {
     public class ProjectileSpawnerData : ComponentData<AttackProjectileSpawner>
     {

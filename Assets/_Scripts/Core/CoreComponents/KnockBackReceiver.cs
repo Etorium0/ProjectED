@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
 
-namespace Etorium.CoreSystem
+namespace Bardent.CoreSystem
 {
     public class KnockBackReceiver : CoreComponent, IKnockBackable
     {

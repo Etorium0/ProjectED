@@ -9,24 +9,106 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0afafe3154a545aeb3a2d29b89102501, type: 3}
+  m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
   m_Name: Sword_1
   m_EditorClassIdentifier: 
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 95b2394cafcd7ac4eb455b8d8735c661,
     type: 2}
   <NumberOfAttacks>k__BackingField: 3
   <ComponentData>k__BackingField:
-  - rid: 8921465091188588650
-  - rid: 8921465091188588656
-  - rid: 8921465116076802192
-  - rid: 8921465203774193735
-  - rid: 8921465212347613270
-  - rid: 8921465212347613308
+  - rid: 5662276240811753472
+  - rid: 4372344435206258688
+  - rid: 4372345045472247809
+  - rid: 3124257199506325504
+  - rid: 2516071312619208704
+  - rid: 2516071382426845184
   references:
     version: 2
     RefIds:
-    - rid: 8921465091188588650
-      type: {class: WeaponSpriteData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
+    - rid: 2516071312619208704
+      type: {class: KnockBackData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: KnockBackData
+        attackData:
+        - name: Attack 1
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 10
+        - name: Attack 2
+          <Angle>k__BackingField: {x: 1, y: 1}
+          <Strength>k__BackingField: 10
+        - name: Attack 3
+          <Angle>k__BackingField: {x: 1, y: 3}
+          <Strength>k__BackingField: 20
+    - rid: 2516071382426845184
+      type: {class: PoiseDamageData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: PoiseDamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 30
+        - name: Attack 2
+          <Amount>k__BackingField: 30
+        - name: Attack 3
+          <Amount>k__BackingField: 30
+    - rid: 3124257199506325504
+      type: {class: DamageData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: DamageData
+        attackData:
+        - name: Attack 1
+          <Amount>k__BackingField: 5
+        - name: Attack 2
+          <Amount>k__BackingField: 10
+        - name: Attack 3
+          <Amount>k__BackingField: 15
+    - rid: 4372344435206258688
+      type: {class: MovementData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: MovementData
+        attackData:
+        - name: Attack 1
+          <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 3
+        - name: Attack 2
+          <Direction>k__BackingField: {x: 1, y: 0}
+          <Velocity>k__BackingField: 4
+        - name: Attack 3
+          <Direction>k__BackingField: {x: 1, y: 5}
+          <Velocity>k__BackingField: 5
+    - rid: 4372345045472247809
+      type: {class: ActionHitBoxData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
+      data:
+        name: ActionHitBoxData
+        attackData:
+        - name: Attack 1
+          Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.41
+        - name: Attack 2
+          Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0.11
+            y: -0.9
+            width: 1.94
+            height: 1.41
+        - name: Attack 3
+          Debug: 0
+          <HitBox>k__BackingField:
+            serializedVersion: 2
+            x: 0
+            y: -0.99
+            width: 1.61
+            height: 2.51
+        <DetectableLayers>k__BackingField:
+          serializedVersion: 2
+          m_Bits: 512
+    - rid: 5662276240811753472
+      type: {class: WeaponSpriteData, ns: Bardent.Weapons.Components, asm: Assembly-CSharp}
       data:
         name: WeaponSpriteData
         attackData:
@@ -57,85 +139,3 @@ MonoBehaviour:
             - {fileID: -312529561, guid: 3179c16b297295440b9749aff89377e2, type: 3}
             - {fileID: -1032906865, guid: 3179c16b297295440b9749aff89377e2, type: 3}
             - {fileID: 621078435, guid: 3179c16b297295440b9749aff89377e2, type: 3}
-    - rid: 8921465091188588656
-      type: {class: MovementData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
-      data:
-        name: MovementData
-        attackData:
-        - name: Attack 1
-          <Direction>k__BackingField: {x: 1, y: 0}
-          <Velocity>k__BackingField: 3
-        - name: Attack 2
-          <Direction>k__BackingField: {x: 1, y: 0}
-          <Velocity>k__BackingField: 4
-        - name: Attack 3
-          <Direction>k__BackingField: {x: 1, y: 5}
-          <Velocity>k__BackingField: 5
-    - rid: 8921465116076802192
-      type: {class: ActionHitBoxData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
-      data:
-        name: ActionHitBoxData
-        attackData:
-        - name: Attack 1
-          Debug: 0
-          <HitBox>k__BackingField:
-            serializedVersion: 2
-            x: 0.3
-            y: -1.01
-            width: 1.6
-            height: 1.7
-        - name: Attack 2
-          Debug: 0
-          <HitBox>k__BackingField:
-            serializedVersion: 2
-            x: 0.3
-            y: -0.83
-            width: 1.65
-            height: 1.7
-        - name: Attack 3
-          Debug: 0
-          <HitBox>k__BackingField:
-            serializedVersion: 2
-            x: 0.3
-            y: -0.83
-            width: 1.55
-            height: 2.35
-        <DetectedLayers>k__BackingField:
-          serializedVersion: 2
-          m_Bits: 512
-    - rid: 8921465203774193735
-      type: {class: DamageData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
-      data:
-        name: DamageData
-        attackData:
-        - name: Attack 1
-          <Amount>k__BackingField: 5
-        - name: Attack 2
-          <Amount>k__BackingField: 10
-        - name: Attack 3
-          <Amount>k__BackingField: 15
-    - rid: 8921465212347613270
-      type: {class: KnockBackData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
-      data:
-        name: KnockBackData
-        attackData:
-        - name: Attack 1
-          <Angle>k__BackingField: {x: 1, y: 1}
-          <Strength>k__BackingField: 10
-        - name: Attack 2
-          <Angle>k__BackingField: {x: 1, y: 1}
-          <Strength>k__BackingField: 10
-        - name: Attack 3
-          <Angle>k__BackingField: {x: 1, y: 3}
-          <Strength>k__BackingField: 20
-    - rid: 8921465212347613308
-      type: {class: PoiseDamageData, ns: Etorium.Weapons.Components, asm: Assembly-CSharp}
-      data:
-        name: PoiseDamageData
-        attackData:
-        - name: Attack 1
-          <Amount>k__BackingField: 30
-        - name: Attack 2
-          <Amount>k__BackingField: 30
-        - name: Attack 3
-          <Amount>k__BackingField: 30

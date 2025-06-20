@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Etorium.Weapons.Components;
+using Bardent.Weapons.Components;
 using UnityEngine;
 
-namespace Etorium.Weapons
+namespace Bardent.Weapons
 {
     public class WeaponGenerator : MonoBehaviour
     {

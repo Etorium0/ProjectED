@@ -1,10 +1,10 @@
-﻿using Etorium.Utilities;
-using Etorium.Interfaces;
-using Etorium.ProjectileSystem.DataPackages;
+﻿using Bardent.Interfaces;
+using Bardent.ProjectileSystem.DataPackages;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /*
      * The PoiseDamage component is responsible for using information provided by the HitBox component to damage the poise of any entities that are on the relevant LayerMask

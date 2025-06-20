@@ -1,7 +1,7 @@
-﻿using Etorium.Weapons.Components;
+﻿using Bardent.Weapons.Components;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class WeaponSpriteData : ComponentData<AttackSprites>
     {

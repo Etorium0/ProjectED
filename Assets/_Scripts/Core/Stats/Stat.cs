@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Etorium.CoreSystem.StatsSystem
+namespace Bardent.CoreSystem.StatsSystem
 {
     [Serializable]
     public class Stat

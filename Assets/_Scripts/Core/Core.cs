@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
-namespace Etorium.CoreSystem
+namespace Bardent.CoreSystem
 {
     public class Core : MonoBehaviour
     {

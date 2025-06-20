@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Etorium.Weapons
+namespace Bardent.Weapons
 {
     public class AnimationEventHandler : MonoBehaviour
     {

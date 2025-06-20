@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
 public class Entity : MonoBehaviour {
@@ -55,7 +55,7 @@ public class Entity : MonoBehaviour {
 		Core.LogicUpdate();
 		stateMachine.currentState.LogicUpdate();
 
-		anim.SetFloat("yVelocity", Movement.RB.velocity.y);
+		anim.SetFloat("yVelocity", Movement.RB.linearVelocity.y);
 
 		if (Time.time >= lastDamageTime + entityData.stunRecoveryTime) {
 			ResetStunResistance();
@@ -79,8 +79,8 @@ public class Entity : MonoBehaviour {
 	}
 
 	public virtual void DamageHop(float velocity) {
-		velocityWorkspace.Set(Movement.RB.velocity.x, velocity);
-		Movement.RB.velocity = velocityWorkspace;
+		velocityWorkspace.Set(Movement.RB.linearVelocity.x, velocity);
+		Movement.RB.linearVelocity = velocityWorkspace;
 	}
 
 	public virtual void ResetStunResistance() {

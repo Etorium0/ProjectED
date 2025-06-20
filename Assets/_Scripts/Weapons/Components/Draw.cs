@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     /*
      * This component is responsible for evaluating the curve when input is released and then broadcasting that value

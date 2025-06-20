@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.CoreSystem
+namespace Bardent.CoreSystem
 {
 	public class CollisionSenses : CoreComponent {
 

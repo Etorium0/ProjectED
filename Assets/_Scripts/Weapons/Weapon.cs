@@ -1,9 +1,9 @@
 using System;
+using Bardent.CoreSystem;
 using UnityEngine;
-using Etorium.CoreSystem;
-using Etorium.Utilities;
+using Bardent.Utilities;
 
-namespace Etorium.Weapons
+namespace Bardent.Weapons
 {
     public class Weapon : MonoBehaviour
     {

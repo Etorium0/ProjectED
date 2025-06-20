@@ -1,7 +1,7 @@
-﻿using Etorium.Interfaces;
+﻿using Bardent.Interfaces;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class PoiseDamage : WeaponComponent<PoiseDamageData, AttackPoiseDamage>
     {

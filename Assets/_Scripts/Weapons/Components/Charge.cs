@@ -1,6 +1,6 @@
-﻿using Etorium.Utilities;
+﻿using Bardent.Utilities;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class Charge : WeaponComponent<ChargeData, AttackCharge>
     {

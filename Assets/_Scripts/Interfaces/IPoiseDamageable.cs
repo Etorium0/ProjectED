@@ -1,4 +1,4 @@
-﻿namespace Etorium.Interfaces
+﻿namespace Bardent.Interfaces
 {
     public interface IPoiseDamageable
     {

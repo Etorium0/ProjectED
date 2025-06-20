@@ -1,8 +1,8 @@
 ﻿using System;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public abstract class WeaponComponent : MonoBehaviour
     {

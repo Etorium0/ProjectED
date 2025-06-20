@@ -1,8 +1,8 @@
 ﻿using System;
-using Etorium.Utilities;
+using Bardent.Utilities;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// DelayedGravity sets the projectiles initial gravity to zero and then sets it to some value after some distance has been travelled.
