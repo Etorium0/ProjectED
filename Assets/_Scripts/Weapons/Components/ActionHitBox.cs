@@ -6,7 +6,7 @@ namespace Etorium.Weapons.Components
 {
     public class ActionHitBox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
     {
-        private event Action<Collider2D[]> OnDetectedCollider2D;
+        public event Action<Collider2D[]> OnDetectedCollider2D;
 
         private CoreComp<CoreSystem.Movement> movement;
 
@@ -21,17 +21,12 @@ namespace Etorium.Weapons.Components
                 transform.position.y + currentAttackData.HitBox.center.y
             );
 
-            detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectedLayers);
+            detected = Physics2D.OverlapBoxAll(offset, currentAttackData.HitBox.size, 0f, data.DetectableLayers);
 
             if (detected.Length == 0)
                 return;
 
             OnDetectedCollider2D?.Invoke(detected);
-
-            foreach (var item in detected)
-            {
-                Debug.Log(item.name);
-            }
         }
 
         protected override void Start()
@@ -39,18 +34,14 @@ namespace Etorium.Weapons.Components
             base.Start();
 
             movement = new CoreComp<CoreSystem.Movement>(Core);
+            
+            AnimationEventHandler.OnAttackAction += HandleAttackAction;
         }
 
-        protected override void OnEnable()
+        protected override void OnDestroy()
         {
-            base.OnEnable();
-            eventHandler.OnAttackAction += HandleAttackAction;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
-            eventHandler.OnAttackAction -= HandleAttackAction;
+            base.OnDestroy();
+            AnimationEventHandler.OnAttackAction -= HandleAttackAction;
         }
 
         private void OnDrawGizmosSelected()
@@ -58,7 +49,7 @@ namespace Etorium.Weapons.Components
             if (data == null)
                 return;
 
-            foreach (var item in data.AttackData)
+            foreach (var item in data.GetAllAttackData())
             {
                 if (!item.Debug)
                     continue;

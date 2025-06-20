@@ -1,4 +1,5 @@
-﻿using Etorium.Weapons.Components;
+﻿using System;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
@@ -7,33 +8,67 @@ namespace Etorium.Weapons.Components
     {
         private CoreSystem.Movement coreMovement;
 
-        private CoreSystem.Movement CoreMovement =>
-            coreMovement ? coreMovement : Core.GetCoreComponent(ref coreMovement);
-        
+        private float velocity;
+        private Vector2 direction;
+
         private void HandleStartMovement()
         {
-            CoreMovement.SetVelocity(currentAttackData.Velocity, currentAttackData.Direction, CoreMovement.FacingDirection);
+            velocity = currentAttackData.Velocity;
+            direction = currentAttackData.Direction;
+            
+            SetVelocity();
         }
 
         private void HandleStopMovement()
         {
-            CoreMovement.SetVelocityZero();
+            velocity = 0f;
+            direction = Vector2.zero;
+
+            SetVelocity();
         }
 
-        protected override void OnEnable()
+        protected override void HandleEnter()
         {
-            base.OnEnable();
-
-            eventHandler.OnStartMovement += HandleStartMovement;
-            eventHandler.OnStopMovement += HandleStopMovement;
-        }
-
-        protected override void OnDisable()
-        {
-            base.OnDisable();
+            base.HandleEnter();
             
-            eventHandler.OnStartMovement -= HandleStartMovement;
-            eventHandler.OnStopMovement -= HandleStopMovement;
+            velocity = 0f;
+            direction = Vector2.zero;
+        }
+
+        private void FixedUpdate()
+        {
+            if(!isAttackActive)
+                return;
+            
+            SetVelocityX();
+        }
+
+        private void SetVelocity()
+        {
+            coreMovement.SetVelocity(velocity, direction, coreMovement.FacingDirection);
+        }
+
+        private void SetVelocityX()
+        {
+            coreMovement.SetVelocityX((direction * velocity).x * coreMovement.FacingDirection);
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            coreMovement = Core.GetCoreComponent<CoreSystem.Movement>();
+            
+            AnimationEventHandler.OnStartMovement += HandleStartMovement;
+            AnimationEventHandler.OnStopMovement += HandleStopMovement;
+        }
+
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            
+            AnimationEventHandler.OnStartMovement -= HandleStartMovement;
+            AnimationEventHandler.OnStopMovement -= HandleStopMovement;
         }
     }
 }

@@ -8,23 +8,26 @@ namespace Etorium.Weapons.Components
     {
         protected Weapon weapon;
 
-        // TODO: Fix this when finishing weapon data
-        // protected AnimationEventHandler EventHandler => weapon.EventHandler;
-        protected AnimationEventHandler eventHandler;
+        protected AnimationEventHandler AnimationEventHandler => weapon.EventHandler;
         protected Core Core => weapon.Core;
+        protected float attackStartTime => weapon.AttackStartTime;
 
         protected bool isAttackActive;
 
+        public virtual void Init()
+        {
+            
+        }
+        
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();
-
-            eventHandler = GetComponentInChildren<AnimationEventHandler>();
         }
 
         protected virtual void Start()
         {
-            
+            weapon.OnEnter += HandleEnter;
+            weapon.OnExit += HandleExit;
         }
 
         protected virtual void HandleEnter()
@@ -37,13 +40,7 @@ namespace Etorium.Weapons.Components
             isAttackActive = false;
         }
 
-        protected virtual void OnEnable()
-        {
-            weapon.OnEnter += HandleEnter;
-            weapon.OnExit += HandleExit;
-        }
-
-        protected virtual void OnDisable()
+        protected virtual void OnDestroy()
         {
             weapon.OnEnter -= HandleEnter;
             weapon.OnExit -= HandleExit;
@@ -59,12 +56,12 @@ namespace Etorium.Weapons.Components
         {
             base.HandleEnter();
 
-            currentAttackData = data.AttackData[weapon.CurrentAttackCounter];
+            currentAttackData = data.GetAttackData(weapon.CurrentAttackCounter);
         }
 
-        protected override void Awake()
+        public override void Init()
         {
-            base.Awake();
+            base.Init();
 
             data = weapon.Data.GetData<T1>();
         }
