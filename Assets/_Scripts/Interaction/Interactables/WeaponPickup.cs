@@ -1,4 +1,5 @@
 ﻿using System;
+using Etorium;
 using Etorium.Weapons;
 using UnityEngine;
 using UnityEngine.Serialization;

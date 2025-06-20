@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardent.CoreSystem;
-using Bardent.Utilities;
+using Etorium.CoreSystem;
+using Etorium.Utilities;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     /*
      * The Charge Weapon Component ticks up a discrete amount of charges that can then be read by other components

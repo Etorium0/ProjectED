@@ -1,7 +1,7 @@
-﻿using Bardent.ProjectileSystem;
-using Bardent.ProjectileSystem.DataPackages;
+﻿using Etorium.ProjectileSystem;
+using Etorium.ProjectileSystem.DataPackages;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     /*
      * When a projectile is spawned, this component gets a list of all targets from the Targeter weapon component and passes that through
