@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// The Movement projectile component is responsible for applying a velocity to the projectile. The velocity can be applied only once upon the projectile
@@ -20,7 +20,7 @@ namespace Etorium.ProjectileSystem.Components
             SetVelocity();
         }
 
-        private void SetVelocity() => rb.linearVelocity = Speed * transform.right;
+        private void SetVelocity() => rb.velocity = Speed * transform.right;
 
         protected override void FixedUpdate()
         {

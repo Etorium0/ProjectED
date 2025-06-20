@@ -1,10 +1,10 @@
-﻿using Etorium.Combat.Damage;
-using Etorium.ProjectileSystem.DataPackages;
-using Etorium.Utilities;
+﻿using Bardent.Combat.Damage;
+using Bardent.ProjectileSystem.DataPackages;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /*
      * The Damage component is responsible for using information provided by the HitBox component to damage any entities that are on the relevant LayerMask

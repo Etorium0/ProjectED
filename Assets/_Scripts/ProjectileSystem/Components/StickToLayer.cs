@@ -1,11 +1,11 @@
-﻿gusing System;
+﻿using System;
 using System.Collections;
-using Etorium.Utilities;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// This component is responsible for ensuring the projectile gets stuck in a specific layer based on what the HitBox detects
@@ -103,7 +103,7 @@ namespace Etorium.ProjectileSystem.Components
             isStuck = true;
 
             sr.sortingLayerName = InactiveSortingLayerName;
-            rb.linearVelocity = Vector2.zero;
+            rb.velocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Static;
 
             setStuck?.Invoke();

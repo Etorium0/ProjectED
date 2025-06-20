@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Etorium.ProjectileSystem.DataPackages;
+using Bardent.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// Base class for any projectile components to implement repeated functionality
