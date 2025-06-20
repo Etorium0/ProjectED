@@ -1,7 +1,7 @@
 ﻿using Etorium.Combat.PoiseDamage;
  using Etorium.ModifierSystem;
 
-namespace Etorium.CoreSystem
+ namespace Etorium.CoreSystem
 {
     public class PoiseDamageReceiver : CoreComponent, IPoiseDamageable
     {

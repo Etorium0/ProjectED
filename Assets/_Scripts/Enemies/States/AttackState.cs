@@ -6,7 +6,7 @@ using UnityEngine;
 public class AttackState : State {
 
 	private Movement movement;
-	// private ParryReceiver parryReceiver;
+	private ParryReceiver parryReceiver;
 
 	protected Transform attackPosition;
 
@@ -17,7 +17,7 @@ public class AttackState : State {
 		this.attackPosition = attackPosition;
 
 		movement = core.GetCoreComponent<Movement>();
-		// parryReceiver = core.GetCoreComponent<ParryReceiver>();
+		parryReceiver = core.GetCoreComponent<ParryReceiver>();
 	}
 
 	public override void DoChecks() {
@@ -55,5 +55,5 @@ public class AttackState : State {
 		isAnimationFinished = true;
 	}
 
-	// public void SetParryWindowActive(bool value) => parryReceiver.SetParryColliderActive(value);
+	public void SetParryWindowActive(bool value) => parryReceiver.SetParryColliderActive(value);
 }

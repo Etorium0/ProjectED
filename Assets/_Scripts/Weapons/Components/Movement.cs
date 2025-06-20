@@ -6,7 +6,7 @@ namespace Etorium.Weapons.Components
 {
     public class Movement : WeaponComponent<MovementData, AttackMovement>
     {
-        private Etorium.CoreSystem.Movement coreMovement;
+        private CoreSystem.Movement coreMovement;
 
         private float velocity;
         private Vector2 direction;
@@ -57,7 +57,7 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            coreMovement = Core.GetCoreComponent<Etorium.CoreSystem.Movement>();
+            coreMovement = Core.GetCoreComponent<CoreSystem.Movement>();
             
             AnimationEventHandler.OnStartMovement += HandleStartMovement;
             AnimationEventHandler.OnStopMovement += HandleStopMovement;

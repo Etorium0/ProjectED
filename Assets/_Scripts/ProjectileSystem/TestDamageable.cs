@@ -1,6 +1,6 @@
 ﻿using System;
-using Etorium.Combat.Damage;
 using Etorium.ProjectileSystem.Components;
+using Etorium.Combat.Damage;
 using UnityEngine;
 
 namespace Etorium.ProjectileSystem

@@ -1,9 +1,10 @@
-﻿using Etorium.Combat.PoiseDamage;
-using Etorium.Interfaces;
+﻿using Etorium.Interfaces;
+using Etorium.Combat.PoiseDamage;
 using Etorium.ProjectileSystem.DataPackages;
 using Etorium.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
+using IPoiseDamageable = Etorium.Interfaces.IPoiseDamageable;
 
 namespace Etorium.ProjectileSystem.Components
 {

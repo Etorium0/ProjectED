@@ -8,7 +8,7 @@ namespace Etorium.Weapons.Components
     {
         public event Action<Collider2D[]> OnDetectedCollider2D;
 
-        private CoreComp<Etorium.CoreSystem.Movement> movement;
+        private CoreComp<CoreSystem.Movement> movement;
 
         private Vector2 offset;
 
@@ -33,7 +33,7 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            movement = new CoreComp<Etorium.CoreSystem.Movement>(Core);
+            movement = new CoreComp<CoreSystem.Movement>(Core);
             
             AnimationEventHandler.OnAttackAction += HandleAttackAction;
         }

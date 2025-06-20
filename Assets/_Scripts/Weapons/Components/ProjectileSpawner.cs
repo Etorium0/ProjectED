@@ -12,7 +12,7 @@ namespace Etorium.Weapons.Components
         public event Action<Projectile> OnSpawnProjectile;
 
         // Movement Core Comp needed to get FacingDirection
-        private Etorium.CoreSystem.Movement movement;
+        private CoreSystem.Movement movement;
 
         // Object pool to store projectiles so we don't have to keep instantiating new ones
         private readonly ObjectPools objectPools = new ObjectPools();
@@ -63,7 +63,7 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            movement = Core.GetCoreComponent<Etorium.CoreSystem.Movement>();
+            movement = Core.GetCoreComponent<CoreSystem.Movement>();
 
             AnimationEventHandler.OnAttackAction += HandleAttackAction;
         }

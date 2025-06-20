@@ -36,15 +36,15 @@ public class Entity : MonoBehaviour {
 	protected bool isDead;
 
 	protected Stats stats;
-	// protected ParryReceiver parryReceiver;
+	protected ParryReceiver parryReceiver;
 
 	public virtual void Awake() {
 		Core = GetComponentInChildren<Core>();
 
 		stats = Core.GetCoreComponent<Stats>();
-		// parryReceiver = Core.GetCoreComponent<ParryReceiver>();
+		parryReceiver = Core.GetCoreComponent<ParryReceiver>();
 
-		// parryReceiver.OnParried += HandleParry;
+		parryReceiver.OnParried += HandleParry;
 
 		currentHealth = entityData.maxHealth;
 		currentStunResistance = entityData.stunResistance;

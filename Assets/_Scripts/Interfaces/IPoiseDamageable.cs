@@ -1,7 +1,9 @@
-﻿namespace Etorium.Interfaces
+﻿using Etorium.Combat.PoiseDamage;
+
+namespace Etorium.Interfaces
 {
     public interface IPoiseDamageable
     {
-        void DamagePoise(float amount);
+        void DamagePoise(PoiseDamageData amount);
     }
 }

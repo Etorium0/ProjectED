@@ -13,7 +13,7 @@ namespace Etorium.Weapons.Components
     {
         private List<Transform> targets = new List<Transform>();
 
-        private Etorium.CoreSystem.Movement movement;
+        private CoreSystem.Movement movement;
 
         private bool isActive;
 
@@ -53,7 +53,7 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            movement = Core.GetCoreComponent<Etorium.CoreSystem.Movement>();
+            movement = Core.GetCoreComponent<CoreSystem.Movement>();
         }
 
         private void FixedUpdate()

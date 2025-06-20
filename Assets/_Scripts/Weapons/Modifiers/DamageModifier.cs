@@ -3,6 +3,7 @@ using Etorium.Utilities;
 using Etorium.Weapons.Components;
 using Etorium.ModifierSystem;
 using UnityEngine;
+using Damage_DamageData = Etorium.Combat.Damage.DamageData;
 using DamageData = Etorium.Combat.Damage.DamageData;
 using Movement = Etorium.CoreSystem.Movement;
 
@@ -11,7 +12,7 @@ namespace Etorium.Weapons.Modifiers
     /*
      * The modifier used by the Block weapon component to block incoming damage by modifying the damage amount.
      */
-    public class DamageModifier : Modifier<DamageData>
+    public class DamageModifier : Modifier<Damage_DamageData>
     {
         // Event that fires off if the block was actually successful
         public event Action<GameObject> OnModified;
@@ -29,7 +30,7 @@ namespace Etorium.Weapons.Modifiers
          * checks the angle of the attacker to the player and compares that to the block data angles. If block is successful, damage amount is modified
          * based on the DamageAbsorption field. If not successful, data is not modified.
          */
-        public override DamageData ModifyValue(DamageData value)
+        public override Damage_DamageData ModifyValue(Damage_DamageData value)
         {
             if (isBlocked(value.Source.transform, out var blockDirectionInformation))
             {

@@ -1,6 +1,6 @@
 using System;
-using Etorium.CoreSystem;
 using UnityEngine;
+using Etorium.CoreSystem;
 using Etorium.Utilities;
 
 namespace Etorium.Weapons

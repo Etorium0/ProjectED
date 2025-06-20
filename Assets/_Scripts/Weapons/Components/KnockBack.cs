@@ -6,7 +6,7 @@ namespace Etorium.Weapons.Components
     {
         private ActionHitBox hitBox;
 
-        private Etorium.CoreSystem.Movement movement;
+        private CoreSystem.Movement movement;
 
         private void HandleDetectCollider2D(Collider2D[] colliders)
         {
@@ -14,7 +14,7 @@ namespace Etorium.Weapons.Components
             {
                 if (item.TryGetComponent(out IKnockBackable knockBackable))
                 {
-                    knockBackable.KnockBack(new Etorium.Combat.KnockBack.KnockBackData(currentAttackData.Angle,
+                    knockBackable.KnockBack(new Combat.KnockBack.KnockBackData(currentAttackData.Angle,
                         currentAttackData.Strength, movement.FacingDirection, Core.Root));
                 }
             }
@@ -28,7 +28,7 @@ namespace Etorium.Weapons.Components
 
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
 
-            movement = Core.GetCoreComponent<Etorium.CoreSystem.Movement>();
+            movement = Core.GetCoreComponent<CoreSystem.Movement>();
         }
 
         protected override void OnDestroy()
