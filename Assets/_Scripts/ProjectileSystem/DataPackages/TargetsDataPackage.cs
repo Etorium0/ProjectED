@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.DataPackages
+namespace Bardent.ProjectileSystem.DataPackages
 {
     [Serializable]
     public class TargetsDataPackage : ProjectileDataPackage
