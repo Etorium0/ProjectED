@@ -1,5 +1,4 @@
-﻿using Etorium.Combat.KnockBack;
-using Etorium.Utilities;
+﻿using Etorium.Utilities;
 using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 using UnityEngine.Events;
@@ -40,7 +39,7 @@ namespace Etorium.ProjectileSystem.Components
                 if (!hit.collider.transform.gameObject.TryGetComponent(out IKnockBackable knockBackable))
                     continue;
 
-                knockBackable.KnockBack(new KnockBackData(angle, strength, direction, projectile.gameObject));
+                knockBackable.KnockBack(angle, strength, direction);
 
                 OnKnockBack?.Invoke();
                 
@@ -68,14 +67,14 @@ namespace Etorium.ProjectileSystem.Components
 
             hitBox = GetComponent<HitBox>();
 
-            hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D += HandleRaycastHit2D;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
             
-            hitBox.OnRaycastHit2D.RemoveListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D -= HandleRaycastHit2D;
         }
 
         #endregion

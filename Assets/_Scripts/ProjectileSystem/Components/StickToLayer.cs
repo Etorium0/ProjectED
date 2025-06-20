@@ -133,9 +133,9 @@ namespace Etorium.ProjectileSystem.Components
             subscribedToDisableNotifier = false;
         }
 
-        protected override void ResetProjectile()
+        protected override void Reset()
         {
-            base.ResetProjectile();
+            base.Reset();
 
             SetUnstuck();
         }
@@ -156,7 +156,7 @@ namespace Etorium.ProjectileSystem.Components
 
             hitBox = GetComponent<HitBox>();
 
-            hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D += HandleRaycastHit2D;
         }
 
         protected override void Update()
@@ -182,7 +182,7 @@ namespace Etorium.ProjectileSystem.Components
         {
             base.OnDestroy();
 
-            hitBox.OnRaycastHit2D.RemoveListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D -= HandleRaycastHit2D;
 
             if (subscribedToDisableNotifier)
             {

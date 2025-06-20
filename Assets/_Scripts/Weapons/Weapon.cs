@@ -8,21 +8,19 @@ namespace Etorium.Weapons
     public class Weapon : MonoBehaviour
     {
         public event Action<bool> OnCurrentInputChange;
-
+        
         public event Action OnEnter;
         public event Action OnExit;
         public event Action OnUseInput;
-
+        
         [SerializeField] private float attackCounterResetCooldown;
 
-        public bool CanEnterAttack { get; private set; }
-        
         public WeaponDataSO Data { get; private set; }
-
+        
         public int CurrentAttackCounter
         {
             get => currentAttackCounter;
-            private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value;
+            private set => currentAttackCounter = value >= Data.NumberOfAttacks ? 0 : value; 
         }
 
         public bool CurrentInput
@@ -39,25 +37,13 @@ namespace Etorium.Weapons
         }
 
         public float AttackStartTime { get; private set; }
-
-        public Animator Anim { get; private set; }
+        
+        private Animator anim;
         public GameObject BaseGameObject { get; private set; }
         public GameObject WeaponSpriteGameObject { get; private set; }
-
-        public AnimationEventHandler EventHandler
-        {
-            get
-            {
-                if (!initDone)
-                {
-                    GetDependencies();
-                }
-
-                return eventHandler;
-            }
-            private set => eventHandler = value;
-        }
-
+        
+        public AnimationEventHandler EventHandler { get; private set; }
+        
         public Core Core { get; private set; }
 
         private int currentAttackCounter;
@@ -65,22 +51,18 @@ namespace Etorium.Weapons
         private TimeNotifier attackCounterResetTimeNotifier;
 
         private bool currentInput;
-
-        private bool initDone;
-        private AnimationEventHandler eventHandler;
-
+        
         public void Enter()
-        {
-            // Debug.Break();
+        {            
             print($"{transform.name} enter");
 
             AttackStartTime = Time.time;
-
-            attackCounterResetTimeNotifier.Disable();
-
-            Anim.SetBool("active", true);
-            Anim.SetInteger("counter", currentAttackCounter);
-
+            
+            attackCounterResetTimeNotifier.StopTimer();
+            
+            anim.SetBool("active", true);
+            anim.SetInteger("counter", currentAttackCounter);
+            
             OnEnter?.Invoke();
         }
 
@@ -92,45 +74,28 @@ namespace Etorium.Weapons
         public void SetData(WeaponDataSO data)
         {
             Data = data;
-            
-            if(Data is null)
-                return;
-            
-            ResetAttackCounter();
         }
 
-        public void SetCanEnterAttack(bool value) => CanEnterAttack = value;
-
-        public void Exit()
+        private void Exit()
         {
-            Anim.SetBool("active", false);
+            anim.SetBool("active", false);
 
             CurrentAttackCounter++;
-            attackCounterResetTimeNotifier.Init(attackCounterResetCooldown);
-
+            attackCounterResetTimeNotifier.StartTimer();
+            
             OnExit?.Invoke();
         }
 
         private void Awake()
         {
-            GetDependencies();
-
-            attackCounterResetTimeNotifier = new TimeNotifier();
-        }
-
-        private void GetDependencies()
-        {
-            if (initDone)
-                return;
-
             BaseGameObject = transform.Find("Base").gameObject;
             WeaponSpriteGameObject = transform.Find("WeaponSprite").gameObject;
-
-            Anim = BaseGameObject.GetComponent<Animator>();
+            
+            anim = BaseGameObject.GetComponent<Animator>();
 
             EventHandler = BaseGameObject.GetComponent<AnimationEventHandler>();
 
-            initDone = true;
+            attackCounterResetTimeNotifier = new TimeNotifier(attackCounterResetCooldown);
         }
 
         private void Update()
@@ -146,12 +111,14 @@ namespace Etorium.Weapons
 
         private void OnEnable()
         {
+            EventHandler.OnFinish += Exit;
             EventHandler.OnUseInput += HandleUseInput;
             attackCounterResetTimeNotifier.OnNotify += ResetAttackCounter;
         }
 
         private void OnDisable()
         {
+            EventHandler.OnFinish -= Exit;
             EventHandler.OnUseInput -= HandleUseInput;
             attackCounterResetTimeNotifier.OnNotify -= ResetAttackCounter;
         }

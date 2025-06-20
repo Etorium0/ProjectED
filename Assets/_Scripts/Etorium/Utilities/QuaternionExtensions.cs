@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.Utilities
+namespace Etorium.Utilities
 {
     public static class QuaternionExtensions
     {

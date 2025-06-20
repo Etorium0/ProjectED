@@ -65,7 +65,7 @@ public class PlayerDashState : PlayerAbilityState {
 					Time.timeScale = 1f;
 					startTime = Time.time;
 					Movement?.CheckIfShouldFlip(Mathf.RoundToInt(dashDirection.x));
-					player.RB.linearDamping = playerData.drag;
+					player.RB.drag = playerData.drag;
 					Movement?.SetVelocity(playerData.dashVelocity, dashDirection);
 					player.DashDirectionIndicator.gameObject.SetActive(false);
 					PlaceAfterImage();
@@ -75,7 +75,7 @@ public class PlayerDashState : PlayerAbilityState {
 				CheckIfShouldPlaceAfterImage();
 
 				if (Time.time >= startTime + playerData.dashTime) {
-					player.RB.linearDamping = 0f;
+					player.RB.drag = 0f;
 					isAbilityDone = true;
 					lastDashTime = Time.time;
 				}

@@ -1,19 +1,14 @@
-﻿using Etorium.Combat.PoiseDamage;
- using Etorium.ModifierSystem;
+﻿using Etorium.Interfaces;
 
- namespace Etorium.CoreSystem
+namespace Etorium.CoreSystem
 {
     public class PoiseDamageReceiver : CoreComponent, IPoiseDamageable
     {
         private Stats stats;
-
-        public Modifiers<Modifier<PoiseDamageData>, PoiseDamageData> Modifiers { get; } = new();
-
-        public void DamagePoise(PoiseDamageData data)
+        
+        public void DamagePoise(float amount)
         {
-            data = Modifiers.ApplyAllModifiers(data);
-            
-            stats.Poise.Decrease(data.Amount);
+            stats.Poise.Decrease(amount);
         }
 
         protected override void Awake()

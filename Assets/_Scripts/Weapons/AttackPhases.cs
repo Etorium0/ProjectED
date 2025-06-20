@@ -5,8 +5,6 @@
         Anticipation,
         Idle,
         Action,
-        Cancel,
-        Break,
-        Parry
+        Cancel
     }
 }

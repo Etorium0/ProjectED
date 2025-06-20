@@ -5,56 +5,39 @@ namespace Etorium.Utilities
 {
     public class TimeNotifier
     {
-        /*
-         * Event will be invoked once duration has passed. If timer is set to restart, it will be invoked every time
-         * the duration passes
-         */
         public event Action OnNotify;
-
+        
+        private float startTime;
         private float duration;
         private float targetTime;
 
-        private bool enabled;
-
-        public void Init(float dur, bool reset = false)
+        private bool isActive;
+        
+        public TimeNotifier(float duration)
         {
-            enabled = true;
-
-            duration = dur;
-            SetTargetTime();
-
-            if (reset)
-            {
-                // If reset is true, then when duration has passed automatically calculate new target time
-                OnNotify += SetTargetTime;
-            }
-            else
-            {
-                // Otherwise, disable when duration has passed
-                OnNotify += Disable;
-            }
+            this.duration = duration;
         }
 
-        private void SetTargetTime()
+        public void StartTimer()
         {
-            targetTime = Time.time + duration;
+            startTime = Time.time;
+            targetTime = startTime + duration;
+            isActive = true;
         }
 
-        public void Disable()
+        public void StopTimer()
         {
-            enabled = false;
-
-            OnNotify -= Disable;
+            isActive = false;
         }
 
         public void Tick()
         {
-            if (!enabled)
-                return;
+            if(!isActive) return;
 
             if (Time.time >= targetTime)
             {
                 OnNotify?.Invoke();
+                StopTimer();
             }
         }
     }

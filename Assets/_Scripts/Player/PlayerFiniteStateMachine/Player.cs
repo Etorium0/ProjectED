@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using Etorium.CoreSystem;
-using Etorium.FSM;
 using Etorium.Weapons;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -28,9 +26,6 @@ public class Player : MonoBehaviour
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
 
-    public PlayerStunState PlayerStunState { get; private set; }
-    public PlayerRestState RestState { get; private set; }
-
     [SerializeField]
     private PlayerData playerData;
     #endregion
@@ -42,10 +37,6 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
-
-    public Stats Stats { get; private set; }
-    
-    public InteractableDetector InteractableDetector { get; private set; }
     #endregion
 
     #region Other Variables         
@@ -67,9 +58,6 @@ public class Player : MonoBehaviour
         
         primaryWeapon.SetCore(Core);
         secondaryWeapon.SetCore(Core);
-
-        Stats = Core.GetCoreComponent<Stats>();
-        InteractableDetector = Core.GetCoreComponent<InteractableDetector>();
         
         StateMachine = new PlayerStateMachine();
 
@@ -88,29 +76,17 @@ public class Player : MonoBehaviour
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", primaryWeapon, CombatInputs.primary);
         SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", secondaryWeapon, CombatInputs.secondary);
-        PlayerStunState = new PlayerStunState(this, StateMachine, playerData, "stun");
-        RestState = new PlayerRestState(this, StateMachine, playerData, "rest");
     }
 
     private void Start()
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
-
-        InputHandler.OnInteractInputChanged += InteractableDetector.TryInteract;
-        
         RB = GetComponent<Rigidbody2D>();
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
 
-        Stats.Poise.OnCurrentValueZero += HandlePoiseCurrentValueZero;
-        
         StateMachine.Initialize(IdleState);
-    }
-
-    private void HandlePoiseCurrentValueZero()
-    {
-        StateMachine.ChangeState(PlayerStunState);
     }
 
     private void Update()
@@ -123,12 +99,6 @@ public class Player : MonoBehaviour
     {
         StateMachine.CurrentState.PhysicsUpdate();
     }
-
-    private void OnDestroy()
-    {
-        Stats.Poise.OnCurrentValueZero -= HandlePoiseCurrentValueZero;
-    }
-
     #endregion
 
     #region Other Functions

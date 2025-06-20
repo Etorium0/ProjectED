@@ -42,14 +42,14 @@ namespace Etorium.Weapons.Components
         {
             base.Start();
 
-            AnimationEventHandler.OnSetOptionalSpriteActive += HandleSetOptionalSpriteActive;
+            eventHandler.OnSetOptionalSpriteActive += HandleSetOptionalSpriteActive;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            AnimationEventHandler.OnSetOptionalSpriteActive -= HandleSetOptionalSpriteActive;
+            eventHandler.OnSetOptionalSpriteActive -= HandleSetOptionalSpriteActive;
         }
 
         #endregion

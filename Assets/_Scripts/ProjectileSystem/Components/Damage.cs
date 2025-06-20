@@ -1,5 +1,4 @@
-﻿using Etorium.Combat.Damage;
-using Etorium.Utilities;
+﻿using Etorium.Utilities;
 using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 using UnityEngine.Events;
@@ -12,9 +11,8 @@ namespace Etorium.ProjectileSystem.Components
      */
     public class Damage : ProjectileComponent
     {
-        public UnityEvent<IDamageable> OnDamage;
-        public UnityEvent<RaycastHit2D> OnRaycastHit;
-
+        public UnityEvent OnDamage;
+        
         [field: SerializeField] public LayerMask LayerMask { get; private set; }
         [field: SerializeField] public bool SetInactiveAfterDamage { get; private set; }
         [field: SerializeField] public float Cooldown { get; private set; }
@@ -50,10 +48,9 @@ namespace Etorium.ProjectileSystem.Components
                 if (!hit.collider.transform.gameObject.TryGetComponent(out IDamageable damageable))
                     continue;
                 
-                damageable.Damage(new DamageData(amount, projectile.gameObject));
+                damageable.Damage(amount);
                 
-                OnDamage?.Invoke(damageable);
-                OnRaycastHit?.Invoke(hit);
+                OnDamage?.Invoke();
 
                 lastDamageTime = Time.time;
 
@@ -85,14 +82,14 @@ namespace Etorium.ProjectileSystem.Components
 
             hitBox = GetComponent<HitBox>();
 
-            hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D += HandleRaycastHit2D;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            hitBox.OnRaycastHit2D.RemoveListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D -= HandleRaycastHit2D;
         }
 
         #endregion

@@ -6,8 +6,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInputHandler : MonoBehaviour
 {
-    public event Action<bool> OnInteractInputChanged; 
-
     private PlayerInput playerInput;
     private Camera cam;
 
@@ -21,8 +19,6 @@ public class PlayerInputHandler : MonoBehaviour
     public bool GrabInput { get; private set; }
     public bool DashInput { get; private set; }
     public bool DashInputStop { get; private set; }
-    public bool RestInput { get; private set; }
-    public bool EscapeInput { get; private set; }
 
     public bool[] AttackInputs { get; private set; }
 
@@ -46,20 +42,6 @@ public class PlayerInputHandler : MonoBehaviour
     {
         CheckJumpInputHoldTime();
         CheckDashInputHoldTime();
-    }
-
-    public void OnInteractInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            OnInteractInputChanged?.Invoke(true);
-            return;
-        }
-
-        if (context.canceled)
-        {
-            OnInteractInputChanged?.Invoke(false);
-        }
     }
 
     public void OnPrimaryAttackInput(InputAction.CallbackContext context)
@@ -151,37 +133,10 @@ public class PlayerInputHandler : MonoBehaviour
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
     }
 
-    public void OnRestInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            RestInput = true;
-        }
-
-        if (context.canceled)
-        {
-            RestInput = false;
-        }
-    }
-
-    public void OnEscapeInput(InputAction.CallbackContext context)
-    {
-        if (context.started)
-        {
-            EscapeInput = true;
-        }
-
-        if (context.canceled)
-        {
-            EscapeInput = false;
-        }
-    }
-    
     public void UseJumpInput() => JumpInput = false;
 
     public void UseDashInput() => DashInput = false;
-    
-    public void UseRestInput() => RestInput = false;
+
     /// <summary>
     /// Used to set the specific attack input back to false. Usually passed through the player attack state from an animation event.
     /// </summary>

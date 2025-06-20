@@ -1,5 +1,4 @@
 ﻿using Etorium.Interfaces;
-using Etorium.Combat.PoiseDamage;
 using UnityEngine;
 
 namespace Etorium.Weapons.Components
@@ -14,7 +13,7 @@ namespace Etorium.Weapons.Components
             {
                 if (item.TryGetComponent(out IPoiseDamageable poiseDamageable))
                 {
-                    poiseDamageable.DamagePoise(new Combat.PoiseDamage.PoiseDamageData(currentAttackData.Amount, Core.Root));
+                    poiseDamageable.DamagePoise(currentAttackData.Amount);
                 }
             }
         }

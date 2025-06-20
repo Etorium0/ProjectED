@@ -36,15 +36,11 @@ public class Entity : MonoBehaviour {
 	protected bool isDead;
 
 	protected Stats stats;
-	protected ParryReceiver parryReceiver;
 
 	public virtual void Awake() {
 		Core = GetComponentInChildren<Core>();
 
 		stats = Core.GetCoreComponent<Stats>();
-		parryReceiver = Core.GetCoreComponent<ParryReceiver>();
-
-		parryReceiver.OnParried += HandleParry;
 
 		currentHealth = entityData.maxHealth;
 		currentStunResistance = entityData.stunResistance;
@@ -59,16 +55,11 @@ public class Entity : MonoBehaviour {
 		Core.LogicUpdate();
 		stateMachine.currentState.LogicUpdate();
 
-		anim.SetFloat("yVelocity", Movement.RB.linearVelocity.y);
+		anim.SetFloat("yVelocity", Movement.RB.velocity.y);
 
 		if (Time.time >= lastDamageTime + entityData.stunRecoveryTime) {
 			ResetStunResistance();
 		}
-	}
-
-	protected virtual void HandleParry()
-	{
-		
 	}
 
 	public virtual void FixedUpdate() {
@@ -88,8 +79,8 @@ public class Entity : MonoBehaviour {
 	}
 
 	public virtual void DamageHop(float velocity) {
-		velocityWorkspace.Set(Movement.RB.linearVelocity.x, velocity);
-		Movement.RB.linearVelocity = velocityWorkspace;
+		velocityWorkspace.Set(Movement.RB.velocity.x, velocity);
+		Movement.RB.velocity = velocityWorkspace;
 	}
 
 	public virtual void ResetStunResistance() {

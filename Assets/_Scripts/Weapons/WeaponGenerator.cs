@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Etorium.CoreSystem;
 using Etorium.Weapons.Components;
 using UnityEngine;
 
@@ -9,10 +8,8 @@ namespace Etorium.Weapons
 {
     public class WeaponGenerator : MonoBehaviour
     {
-        public event Action OnWeaponGenerating;
-        
         [SerializeField] private Weapon weapon;
-        [SerializeField] private CombatInputs combatInput;
+        [SerializeField] private WeaponDataSO data;
 
         private List<WeaponComponent> componentAlreadyOnWeapon = new List<WeaponComponent>();
 
@@ -21,20 +18,22 @@ namespace Etorium.Weapons
         private List<Type> componentDependencies = new List<Type>();
 
         private Animator anim;
-
-        private WeaponInventory weaponInventory;
-
-        private void GenerateWeapon(WeaponDataSO data)
+        
+        private void Start()
         {
-            OnWeaponGenerating?.Invoke();
-            
-            weapon.SetData(data);
+            anim = GetComponentInChildren<Animator>();
+            GenerateWeapon(data);
+        }
 
-            if (data is null)
-            {
-                weapon.SetCanEnterAttack(false);
-                return;
-            }
+        [ContextMenu("Test Generate")]
+        private void TestGeneration()
+        {
+            GenerateWeapon(data);
+        }
+
+        public void GenerateWeapon(WeaponDataSO data)
+        {
+            weapon.SetData(data);
             
             componentAlreadyOnWeapon.Clear();
             componentsAddedToWeapon.Clear();
@@ -70,39 +69,6 @@ namespace Etorium.Weapons
             }
 
             anim.runtimeAnimatorController = data.AnimatorController;
-            
-            weapon.SetCanEnterAttack(true);
         }
-        
-        private void HandleWeaponDataChanged(int inputIndex, WeaponDataSO data)
-        {
-            if (inputIndex != (int)combatInput)
-                return;
-            
-            GenerateWeapon(data);
-        }
-        
-        #region Plumbing
-
-        private void Start()
-        {
-            weaponInventory = weapon.Core.GetCoreComponent<WeaponInventory>();
-
-            weaponInventory.OnWeaponDataChanged += HandleWeaponDataChanged;
-            
-            anim = GetComponentInChildren<Animator>();
-
-            if (weaponInventory.TryGetWeapon((int)combatInput, out var data))
-            {
-                GenerateWeapon(data);
-            }
-        }
-
-        private void OnDestroy()
-        {
-            weaponInventory.OnWeaponDataChanged -= HandleWeaponDataChanged;
-        }
-
-        #endregion
     }
 }

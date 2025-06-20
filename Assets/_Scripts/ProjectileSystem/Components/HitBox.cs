@@ -1,7 +1,6 @@
 ﻿using System;
 using Etorium.Utilities;
 using UnityEngine;
-using UnityEngine.Events;
 
 namespace Etorium.ProjectileSystem.Components
 {
@@ -11,8 +10,7 @@ namespace Etorium.ProjectileSystem.Components
     /// </summary>
     public class HitBox : ProjectileComponent
     {
-        // public event Action<RaycastHit2D[]> OnRaycastHit2D;
-        public UnityEvent<RaycastHit2D[]> OnRaycastHit2D; 
+        public event Action<RaycastHit2D[]> OnRaycastHit2D;
 
         [field: SerializeField] public Rect HitBoxRect { get; private set; }
         [field: SerializeField] public LayerMask LayerMask { get; private set; }

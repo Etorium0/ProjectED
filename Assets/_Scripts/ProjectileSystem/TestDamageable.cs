@@ -1,5 +1,4 @@
 ﻿using System;
-using Etorium.Combat.Damage;
 using Etorium.ProjectileSystem.Components;
 using UnityEngine;
 
@@ -10,9 +9,9 @@ namespace Etorium.ProjectileSystem
      */
     public class TestDamageable : MonoBehaviour, IDamageable
     {
-        public void Damage(DamageData data)
+        public void Damage(float amount)
         {
-            print($"{gameObject.name} Damaged: {data.Amount}");
+            print($"{gameObject.name} Damaged: {amount}");
         }
     }
 }

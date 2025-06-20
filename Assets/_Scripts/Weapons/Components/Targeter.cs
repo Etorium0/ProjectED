@@ -69,7 +69,7 @@ namespace Etorium.Weapons.Components
             if (data == null)
                 return;
 
-            foreach (var attackTargeter in data.GetAllAttackData())
+            foreach (var attackTargeter in data.AttackData)
             {
                 Gizmos.DrawWireCube(transform.position + (Vector3)attackTargeter.Area.center, attackTargeter.Area.size);
             }

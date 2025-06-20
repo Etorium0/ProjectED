@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 
-namespace Bardent.Utilities
+namespace Etorium.Utilities
 {
-    /// <summary>
-    /// This class holds some useful functions pertaining to LayerMasks
-    /// </summary>
     public static class LayerMaskUtilities
     {
         

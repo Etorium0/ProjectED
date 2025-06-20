@@ -1,9 +1,9 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bardent.Utilities
+namespace Etorium.Utilities
 {
-    /// <summary>
+/// <summary>
     /// Distance notifier takes in a starting position and a desired distance from that position. When an object
     /// reaches that distance from the target, it invokes an event.
     /// </summary>
