@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     /*
      * This component detects any colliders on a given Layer every FixedUpdate while the attack is active.
@@ -69,7 +69,7 @@ namespace Etorium.Weapons.Components
             if (data == null)
                 return;
 
-            foreach (var attackTargeter in data.GetAllAttackData())
+            foreach (var attackTargeter in data.AttackData)
             {
                 Gizmos.DrawWireCube(transform.position + (Vector3)attackTargeter.Area.center, attackTargeter.Area.size);
             }

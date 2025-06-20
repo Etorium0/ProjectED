@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Etorium.Interfaces;
+using Bardent.Interfaces;
 using UnityEngine;
 
-namespace Etorium.ObjectPoolSystem
+namespace Bardent.ObjectPoolSystem
 {
     /*
      * Abstract definition of the generic object pool class. It allows us to call the Release function without having to know

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.CoreSystem
+namespace Bardent.CoreSystem
 {
     public class Movement : CoreComponent
     {
@@ -83,13 +83,6 @@ namespace Etorium.CoreSystem
         {
             FacingDirection *= -1;
             RB.transform.Rotate(0.0f, 180.0f, 0.0f);
-        }
-        
-        public Vector2 FindRelativePoint(Vector2 offset)
-        {
-            offset.x *= FacingDirection;
-
-            return transform.position + (Vector3)offset;
         }
 
         #endregion

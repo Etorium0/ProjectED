@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class InputHold : WeaponComponent
     {
@@ -52,7 +52,7 @@ namespace Etorium.Weapons.Components
             anim = GetComponentInChildren<Animator>();
 
             weapon.OnCurrentInputChange += HandleCurrentInputChange;
-            AnimationEventHandler.OnMinHoldPassed += HandleMinHoldPassed;
+            eventHandler.OnMinHoldPassed += HandleMinHoldPassed;
         }
 
         protected override void OnDestroy()
@@ -60,7 +60,7 @@ namespace Etorium.Weapons.Components
             base.OnDestroy();
 
             weapon.OnCurrentInputChange -= HandleCurrentInputChange;
-            AnimationEventHandler.OnMinHoldPassed -= HandleMinHoldPassed;
+            eventHandler.OnMinHoldPassed -= HandleMinHoldPassed;
         }
     }
 }

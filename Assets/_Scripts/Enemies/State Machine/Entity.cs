@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
 public class Entity : MonoBehaviour {
@@ -36,15 +36,11 @@ public class Entity : MonoBehaviour {
 	protected bool isDead;
 
 	protected Stats stats;
-	protected ParryReceiver parryReceiver;
 
 	public virtual void Awake() {
 		Core = GetComponentInChildren<Core>();
 
 		stats = Core.GetCoreComponent<Stats>();
-		parryReceiver = Core.GetCoreComponent<ParryReceiver>();
-
-		parryReceiver.OnParried += HandleParry;
 
 		currentHealth = entityData.maxHealth;
 		currentStunResistance = entityData.stunResistance;
@@ -64,11 +60,6 @@ public class Entity : MonoBehaviour {
 		if (Time.time >= lastDamageTime + entityData.stunRecoveryTime) {
 			ResetStunResistance();
 		}
-	}
-
-	protected virtual void HandleParry()
-	{
-		
 	}
 
 	public virtual void FixedUpdate() {

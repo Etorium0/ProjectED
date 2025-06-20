@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.DataPackages
+namespace Bardent.ProjectileSystem.DataPackages
 {
     [Serializable]
     public class SpriteDataPackage : ProjectileDataPackage

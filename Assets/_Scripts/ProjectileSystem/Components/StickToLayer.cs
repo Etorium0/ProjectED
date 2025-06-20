@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
-using Etorium.Utilities;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// This component is responsible for ensuring the projectile gets stuck in a specific layer based on what the HitBox detects
@@ -103,7 +103,7 @@ namespace Etorium.ProjectileSystem.Components
             isStuck = true;
 
             sr.sortingLayerName = InactiveSortingLayerName;
-            rb.velocity = Vector2.zero;
+            rb.linearVelocity = Vector2.zero;
             rb.bodyType = RigidbodyType2D.Static;
 
             setStuck?.Invoke();
@@ -133,9 +133,9 @@ namespace Etorium.ProjectileSystem.Components
             subscribedToDisableNotifier = false;
         }
 
-        protected override void ResetProjectile()
+        protected override void Reset()
         {
-            base.ResetProjectile();
+            base.Reset();
 
             SetUnstuck();
         }
@@ -156,7 +156,7 @@ namespace Etorium.ProjectileSystem.Components
 
             hitBox = GetComponent<HitBox>();
 
-            hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D += HandleRaycastHit2D;
         }
 
         protected override void Update()
@@ -182,7 +182,7 @@ namespace Etorium.ProjectileSystem.Components
         {
             base.OnDestroy();
 
-            hitBox.OnRaycastHit2D.RemoveListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D -= HandleRaycastHit2D;
 
             if (subscribedToDisableNotifier)
             {

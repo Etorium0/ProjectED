@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.DataPackages
+namespace Bardent.ProjectileSystem.DataPackages
 {
     /*
     * DamageDataPackage is the data related to the amount of damage the projectile does. If a component is interested in this data they can check to see

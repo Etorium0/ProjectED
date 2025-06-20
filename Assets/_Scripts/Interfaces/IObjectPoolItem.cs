@@ -1,8 +1,8 @@
 ﻿using System;
-using Etorium.ObjectPoolSystem;
+using Bardent.ObjectPoolSystem;
 using UnityEngine;
 
-namespace Etorium.Interfaces
+namespace Bardent.Interfaces
 {
     public interface IObjectPoolItem
     {

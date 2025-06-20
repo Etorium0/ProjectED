@@ -1,11 +1,10 @@
-﻿using Etorium.Combat.PoiseDamage;
-using Etorium.Interfaces;
-using Etorium.Utilities;
-using Etorium.ProjectileSystem.DataPackages;
+﻿using Bardent.Interfaces;
+using Bardent.ProjectileSystem.DataPackages;
+using Bardent.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /*
      * The PoiseDamage component is responsible for using information provided by the HitBox component to damage the poise of any entities that are on the relevant LayerMask
@@ -36,7 +35,7 @@ namespace Etorium.ProjectileSystem.Components
                 if (!hit.collider.transform.gameObject.TryGetComponent(out IPoiseDamageable poiseDamageable))
                     continue;
                 
-                poiseDamageable.DamagePoise(new PoiseDamageData(amount, projectile.gameObject));
+                poiseDamageable.DamagePoise(amount);
                 
                 OnPoiseDamage?.Invoke();
 
@@ -63,14 +62,14 @@ namespace Etorium.ProjectileSystem.Components
 
             hitBox = GetComponent<HitBox>();
 
-            hitBox.OnRaycastHit2D.AddListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D += HandleRaycastHit2D;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            hitBox.OnRaycastHit2D.RemoveListener(HandleRaycastHit2D);
+            hitBox.OnRaycastHit2D -= HandleRaycastHit2D;
         }
 
         #endregion

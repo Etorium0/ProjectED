@@ -1,47 +1,45 @@
-﻿using System;
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
 
 public class GameManager : MonoBehaviour
 {
-    public event Action<GameState> OnGameStateChanged;
+    [SerializeField]
+    private Transform respawnPoint;
+    [SerializeField]
+    private GameObject player;
+    [SerializeField]
+    private float respawnTime;
 
-    private GameState currentGameState = GameState.Gameplay;
+    private float respawnTimeStart;
 
-    public void ChangeState(GameState state)
+    private bool respawn;
+
+    private CinemachineVirtualCamera CVC;
+
+    private void Start()
     {
-        if (state == currentGameState)
-            return;
+        CVC = GameObject.Find("Player Camera").GetComponent<CinemachineVirtualCamera>();
+    }
 
-        switch (state)
+    private void Update()
+    {
+        CheckRespawn();
+    }
+    public void Respawn()
+    {
+        respawnTimeStart = Time.time;
+        respawn = true;
+    }
+
+    private void CheckRespawn()
+    {
+        if(Time.time >= respawnTimeStart + respawnTime && respawn)
         {
-            case GameState.UI:
-                EnterUIState();
-                break;
-            case GameState.Gameplay:
-                EnterGameplayState();
-                break;
-            default:
-                throw new ArgumentOutOfRangeException(nameof(state), state, null);
+            var playerTemp = Instantiate(player, respawnPoint);
+            CVC.m_Follow = playerTemp.transform;
+            respawn = false;
         }
-
-        currentGameState = state;
-        OnGameStateChanged?.Invoke(currentGameState);
-    }
-
-    private void EnterUIState()
-    {
-        Time.timeScale = 0f;
-    }
-
-    private void EnterGameplayState()
-    {
-        Time.timeScale = 1f;
-    }
-
-
-    public enum GameState
-    {
-        UI,
-        Gameplay
     }
 }

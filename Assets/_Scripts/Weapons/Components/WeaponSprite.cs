@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Etorium.Weapons.Components;
+using Bardent.Weapons.Components;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class WeaponSprite : WeaponComponent<WeaponSpriteData, AttackSprites>
     {
@@ -58,7 +58,7 @@ namespace Etorium.Weapons.Components
             
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
 
-            AnimationEventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
+            eventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
         }
 
         protected override void OnDestroy()
@@ -67,7 +67,7 @@ namespace Etorium.Weapons.Components
             
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
             
-            AnimationEventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
+            eventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
         }
     }
 }

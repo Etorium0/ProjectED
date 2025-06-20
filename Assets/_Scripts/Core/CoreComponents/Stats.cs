@@ -1,8 +1,8 @@
 ﻿using System;
-using Etorium.CoreSystem.StatsSystem;
+using Bardent.CoreSystem.StatsSystem;
 using UnityEngine;
 
-namespace Etorium.CoreSystem
+namespace Bardent.CoreSystem
 {
     public class Stats : CoreComponent
     {

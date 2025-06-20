@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
 public class StunState : State {
@@ -35,6 +35,8 @@ public class StunState : State {
 
 		isStunTimeOver = false;
 		isMovementStopped = false;
+		Movement?.SetVelocity(stateData.stunKnockbackSpeed, stateData.stunKnockbackAngle, entity.lastDamageDirection);
+
 	}
 
 	public override void Exit() {

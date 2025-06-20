@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using Etorium.Interfaces;
+using Bardent.Interfaces;
 using UnityEngine;
 
-namespace Etorium.ObjectPoolSystem
+namespace Bardent.ObjectPoolSystem
 {
     /*
      * Implementation of the IObjectPoolItem interface that can be used in most cases.

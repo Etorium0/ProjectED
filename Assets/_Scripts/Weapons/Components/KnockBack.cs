@@ -1,25 +1,24 @@
 ﻿using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class KnockBack : WeaponComponent<KnockBackData, AttackKnockBack>
     {
         private ActionHitBox hitBox;
 
         private CoreSystem.Movement movement;
-
+        
         private void HandleDetectCollider2D(Collider2D[] colliders)
         {
             foreach (var item in colliders)
             {
                 if (item.TryGetComponent(out IKnockBackable knockBackable))
                 {
-                    knockBackable.KnockBack(new Combat.KnockBack.KnockBackData(currentAttackData.Angle,
-                        currentAttackData.Strength, movement.FacingDirection, Core.Root));
+                    knockBackable.KnockBack(currentAttackData.Angle, currentAttackData.Strength, movement.FacingDirection);
                 }
             }
         }
-
+        
         protected override void Start()
         {
             base.Start();

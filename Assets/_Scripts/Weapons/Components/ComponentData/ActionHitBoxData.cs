@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class ActionHitBoxData : ComponentData<AttackActionHitBox>
     {

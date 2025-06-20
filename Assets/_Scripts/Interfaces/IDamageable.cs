@@ -1,7 +1,8 @@
-﻿namespace Etorium.Combat.Damage
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public interface IDamageable
 {
-    public interface IDamageable
-    {
-        void Damage(DamageData data);
-    }
+    void Damage(float amount);
 }

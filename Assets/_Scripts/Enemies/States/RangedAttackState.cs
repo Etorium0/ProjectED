@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium.Projectiles;
+using Bardent.Projectiles;
 using UnityEngine;
 
 public class RangedAttackState : AttackState

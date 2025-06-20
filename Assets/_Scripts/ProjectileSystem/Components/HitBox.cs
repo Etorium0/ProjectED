@@ -1,9 +1,8 @@
 ﻿using System;
-using Etorium.Utilities;
+using Bardent.Utilities;
 using UnityEngine;
-using UnityEngine.Events;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// This class is a generic HitBox used by projectiles. The HitBox shape itself is defined by a Rect and it uses BoxCastAll to
@@ -11,8 +10,7 @@ namespace Etorium.ProjectileSystem.Components
     /// </summary>
     public class HitBox : ProjectileComponent
     {
-        // public event Action<RaycastHit2D[]> OnRaycastHit2D;
-        public UnityEvent<RaycastHit2D[]> OnRaycastHit2D; 
+        public event Action<RaycastHit2D[]> OnRaycastHit2D;
 
         [field: SerializeField] public Rect HitBoxRect { get; private set; }
         [field: SerializeField] public LayerMask LayerMask { get; private set; }
@@ -47,7 +45,7 @@ namespace Etorium.ProjectileSystem.Components
             base.FixedUpdate();
 
             // Used to compensate for projectile velocity to help stop clipping
-            checkDistance = rb.velocity.magnitude * Time.deltaTime;
+            checkDistance = rb.linearVelocity.magnitude * Time.deltaTime;
 
             CheckHitBox();
         }

@@ -1,9 +1,7 @@
-﻿using Etorium.Combat.PoiseDamage;
-
-namespace Etorium.Interfaces
+﻿namespace Bardent.Interfaces
 {
     public interface IPoiseDamageable
     {
-        void DamagePoise(PoiseDamageData amount);
+        void DamagePoise(float amount);
     }
 }

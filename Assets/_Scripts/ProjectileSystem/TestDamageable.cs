@@ -1,18 +1,17 @@
 ﻿using System;
-using Etorium.Combat.Damage;
-using Etorium.ProjectileSystem.Components;
+using Bardent.ProjectileSystem.Components;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem
+namespace Bardent.ProjectileSystem
 {
     /*
      * This MonoBehaviour is simply used to print the damage amount received in the ProjectileTestScene
      */
     public class TestDamageable : MonoBehaviour, IDamageable
     {
-        public void Damage(DamageData data)
+        public void Damage(float amount)
         {
-            print($"{gameObject.name} Damaged: {data.Amount}");
+            print($"{gameObject.name} Damaged: {amount}");
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class Damage : WeaponComponent<DamageData, AttackDamage>
     {
@@ -20,16 +20,16 @@ namespace Etorium.Weapons.Components
         protected override void Start()
         {
             base.Start();
-            
+
             hitBox = GetComponent<ActionHitBox>();
             
             hitBox.OnDetectedCollider2D += HandleDetectCollider2D;
         }
-        
+
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            
+
             hitBox.OnDetectedCollider2D -= HandleDetectCollider2D;
         }
     }

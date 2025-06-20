@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Etorium.Projectiles
+namespace Bardent.Projectiles
 {
     public class Projectile : MonoBehaviour
     {
@@ -32,7 +32,7 @@ namespace Etorium.Projectiles
             rb = GetComponent<Rigidbody2D>();
 
             rb.gravityScale = 0.0f;
-            rb.velocity = transform.right * speed;
+            rb.linearVelocity = transform.right * speed;
 
             isGravityOn = false;
 
@@ -47,7 +47,7 @@ namespace Etorium.Projectiles
 
                 if (isGravityOn)
                 {
-                    float angle = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
+                    float angle = Mathf.Atan2(rb.linearVelocity.y, rb.linearVelocity.x) * Mathf.Rad2Deg;
                     transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
                 }
             }
@@ -70,7 +70,7 @@ namespace Etorium.Projectiles
                 {
                     hasHitGround = true;
                     rb.gravityScale = 0f;
-                    rb.velocity = Vector2.zero;
+                    rb.linearVelocity = Vector2.zero;
                 }
 
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
-using Etorium.ProjectileSystem.DataPackages;
+using Bardent.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Etorium.ProjectileSystem.Components
+namespace Bardent.ProjectileSystem.Components
 {
     /// <summary>
     /// Base class for any projectile components to implement repeated functionality
@@ -23,7 +23,7 @@ namespace Etorium.ProjectileSystem.Components
             SetActive(true);
         }
 
-        protected virtual void ResetProjectile()
+        protected virtual void Reset()
         {
             
         }
@@ -55,7 +55,7 @@ namespace Etorium.ProjectileSystem.Components
             projectile = GetComponent<Projectile>();
 
             projectile.OnInit += Init;
-            projectile.OnReset += ResetProjectile;
+            projectile.OnReset += Reset;
             projectile.OnReceiveDataPackage += HandleReceiveDataPackage;
         }
 
@@ -77,7 +77,7 @@ namespace Etorium.ProjectileSystem.Components
         protected virtual void OnDestroy()
         {
             projectile.OnInit -= Init;
-            projectile.OnReset -= ResetProjectile;
+            projectile.OnReset -= Reset;
             projectile.OnReceiveDataPackage -= HandleReceiveDataPackage;
         }
 

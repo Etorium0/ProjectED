@@ -1,4 +1,4 @@
-﻿namespace Etorium.Weapons.Components
+﻿namespace Bardent.Weapons.Components
 {
     public class TargeterData : ComponentData<AttackTargeter>
     {

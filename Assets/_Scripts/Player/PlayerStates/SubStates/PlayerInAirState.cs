@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Etorium.CoreSystem;
+using Bardent.CoreSystem;
 using UnityEngine;
 
 public class PlayerInAirState : PlayerState
@@ -101,11 +101,11 @@ public class PlayerInAirState : PlayerState
 
         CheckJumpMultiplier();
 
-        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && player.PrimaryAttackState.CanTransitionToAttackState())
+        if (player.InputHandler.AttackInputs[(int)CombatInputs.primary])
         {
             stateMachine.ChangeState(player.PrimaryAttackState);
         }
-        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary] && player.SecondaryAttackState.CanTransitionToAttackState())
+        else if (player.InputHandler.AttackInputs[(int)CombatInputs.secondary])
         {
             stateMachine.ChangeState(player.SecondaryAttackState);
         }

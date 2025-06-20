@@ -1,8 +1,7 @@
-﻿using Etorium.Interfaces;
-using Etorium.Combat.PoiseDamage;
+﻿using Bardent.Interfaces;
 using UnityEngine;
 
-namespace Etorium.Weapons.Components
+namespace Bardent.Weapons.Components
 {
     public class PoiseDamage : WeaponComponent<PoiseDamageData, AttackPoiseDamage>
     {
@@ -14,7 +13,7 @@ namespace Etorium.Weapons.Components
             {
                 if (item.TryGetComponent(out IPoiseDamageable poiseDamageable))
                 {
-                    poiseDamageable.DamagePoise(new Combat.PoiseDamage.PoiseDamageData(currentAttackData.Amount, Core.Root));
+                    poiseDamageable.DamagePoise(currentAttackData.Amount);
                 }
             }
         }
