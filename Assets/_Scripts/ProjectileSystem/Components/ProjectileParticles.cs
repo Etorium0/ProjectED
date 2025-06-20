@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     public class ProjectileParticles : MonoBehaviour
     {

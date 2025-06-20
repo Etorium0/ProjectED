@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem
+namespace Etorium.ProjectileSystem
 {
     /// <summary>
     /// This class fires off an event whenever the GameObject it is attached to is disabled or destroyed

@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardent.Utilities;
+using Etorium.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     /// <summary>
     /// This class is a generic HitBox used by projectiles. The HitBox shape itself is defined by a Rect and it uses BoxCastAll to

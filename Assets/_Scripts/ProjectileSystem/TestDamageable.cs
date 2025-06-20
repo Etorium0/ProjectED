@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardent.Combat.Damage;
-using Bardent.ProjectileSystem.Components;
+using Etorium.Combat.Damage;
+using Etorium.ProjectileSystem.Components;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem
+namespace Etorium.ProjectileSystem
 {
     /*
      * This MonoBehaviour is simply used to print the damage amount received in the ProjectileTestScene
