@@ -9,7 +9,8 @@ public class PlayerGroundedState : PlayerState
     protected int yInput;
 
     protected bool isTouchingCeiling;
-
+    protected bool isNearBonfire;
+    
     protected Movement Movement
     {
         get => movement ?? core.GetCoreComponent(ref movement);
@@ -30,6 +31,7 @@ public class PlayerGroundedState : PlayerState
     private bool isTouchingWall;
     private bool isTouchingLedge;
     private bool dashInput;
+    private bool restInput;
 
     public PlayerGroundedState(Player player, PlayerStateMachine stateMachine, PlayerData playerData,
         string animBoolName) : base(player, stateMachine, playerData, animBoolName)
@@ -46,6 +48,7 @@ public class PlayerGroundedState : PlayerState
             isTouchingWall = CollisionSenses.WallFront;
             isTouchingLedge = CollisionSenses.LedgeHorizontal;
             isTouchingCeiling = CollisionSenses.Ceiling;
+            isNearBonfire = CollisionSenses.NearBonfire;
         }
     }
 
@@ -71,6 +74,7 @@ public class PlayerGroundedState : PlayerState
         jumpInput = player.InputHandler.JumpInput;
         grabInput = player.InputHandler.GrabInput;
         dashInput = player.InputHandler.DashInput;
+        restInput = player.InputHandler.RestInput;
 
         if (player.InputHandler.AttackInputs[(int)CombatInputs.primary] && !isTouchingCeiling)
         {
@@ -96,6 +100,10 @@ public class PlayerGroundedState : PlayerState
         else if (dashInput && player.DashState.CheckIfCanDash() && !isTouchingCeiling)
         {
             stateMachine.ChangeState(player.DashState);
+        }
+        else if (restInput && isNearBonfire)
+        {
+            stateMachine.ChangeState(player.RestState);
         }
     }
 

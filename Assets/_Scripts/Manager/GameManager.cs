@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         if(Time.time >= respawnTimeStart + respawnTime && respawn)
         {
             var playerTemp = Instantiate(player, lastCheckpointPosition, Quaternion.identity);
+            playerTemp.SetActive(true);
             CVC.m_Follow = playerTemp.transform;
             respawn = false;
         }

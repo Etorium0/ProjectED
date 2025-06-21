@@ -27,9 +27,13 @@ namespace Etorium.CoreSystem
             {
                 ParticleManager.StartParticles(particle);
             }
+
+            if (core.transform.parent.CompareTag("Player"))
+            {
+                gameManager.Respawn();
+            }
         
-            // core.transform.parent.gameObject.SetActive(false);
-            gameManager.Respawn();
+            core.transform.parent.gameObject.SetActive(false);
         }
 
         private void OnEnable()

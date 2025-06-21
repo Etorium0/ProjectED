@@ -20,8 +20,7 @@ public class Bonfire : MonoBehaviour
         }
     }
 
-    // Use OnTriggerEnter for 3D games or OnTriggerEnter2D for 2D games.
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
         if (activated) return; // Don't reactivate
 
@@ -29,6 +28,25 @@ public class Bonfire : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             Debug.Log("Bonfire activated!");
+            
+            var playerCore = other.GetComponentInChildren<Etorium.CoreSystem.Core>();
+            if (playerCore != null)
+            {
+                var stats = playerCore.GetCoreComponent<Etorium.CoreSystem.Stats>();
+                if (stats != null)
+                {
+                    stats.Health.Init(); // Heal the player to full
+                    Debug.Log("Player healed to full health.");
+                }
+                else
+                {
+                    Debug.LogError("Stats Component not found on Player's Core!");
+                }
+            }
+            else
+            {
+                Debug.LogError("Core not found on Player!");
+            }
             
             // Update the checkpoint in the GameManager
             if (gameManager != null)

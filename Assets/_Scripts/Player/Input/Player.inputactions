@@ -18,7 +18,7 @@
                     "name": "Jump",
                     "type": "Button",
                     "id": "0f9d76e3-7a4e-4d5f-851a-b6b267db8877",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -27,7 +27,7 @@
                     "name": "Grab",
                     "type": "Button",
                     "id": "ee8c4c69-67eb-4e6d-b014-3691699bc132",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -64,6 +64,15 @@
                     "type": "Button",
                     "id": "10d86b8a-51f4-4b82-83a6-9d27277fb0bc",
                     "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Rest",
+                    "type": "Button",
+                    "id": "a25045be-304b-48c8-821f-4e40fa5b6cc3",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
@@ -287,6 +296,28 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "SecondaryAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1cf0782c-de9d-4307-9f87-df9cef5f8847",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard",
+                    "action": "Rest",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a9e212b4-ebbd-42a9-a236-78ba3b2882a7",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Rest",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

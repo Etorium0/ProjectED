@@ -220,6 +220,11 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 440237522966884352, guid: b17a3fa7657d60a45ae08180a9229f6b,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5279488530294178745, guid: b17a3fa7657d60a45ae08180a9229f6b,
         type: 3}
       propertyPath: m_Name
@@ -275,10 +280,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8199345515913776852, guid: b17a3fa7657d60a45ae08180a9229f6b,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 1.9350615
+      objectReference: {fileID: 0}
+    - target: {fileID: 8199345515913776852, guid: b17a3fa7657d60a45ae08180a9229f6b,
+        type: 3}
+      propertyPath: m_Offset.x
+      value: 0.038825035
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5279488530294178745, guid: b17a3fa7657d60a45ae08180a9229f6b,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1640320307}
   m_SourcePrefab: {fileID: 100100000, guid: b17a3fa7657d60a45ae08180a9229f6b, type: 3}
 --- !u!1 &118650068
 GameObject:
@@ -613,6 +632,22 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 10d86b8a-51f4-4b82-83a6-9d27277fb0bc
     m_ActionName: 'Gameplay/SecondaryAttack[/Mouse/rightButton,/XInputControllerWindows/buttonNorth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 225787430}
+        m_TargetAssemblyTypeName: PlayerInputHandler, Assembly-CSharp
+        m_MethodName: OnRestInput
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: a25045be-304b-48c8-821f-4e40fa5b6cc3
+    m_ActionName: 'Gameplay/Rest[/Keyboard/q]'
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Gameplay
@@ -1576,11 +1611,16 @@ MonoBehaviour:
   ledgeCheckHorizontal: {fileID: 0}
   ledgeCheckVertical: {fileID: 1704310397}
   ceilingCheck: {fileID: 0}
+  bonfireCheck: {fileID: 0}
   groundCheckRadius: 0.3
   wallCheckDistance: 0.3
+  bonfireCheckDistance: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  whatIsBonfire:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -10616,8 +10656,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d95c7895d3443f74f922b6a08c63032e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSpawnPoint: {fileID: 0}
-  player: {fileID: 2011612969524986322, guid: bae6a535991008842947de96499e78a0, type: 3}
+  initialSpawnPoint: {fileID: 1640320306}
+  player: {fileID: 225787429}
   respawnTime: 5
 --- !u!4 &979532588
 Transform:
@@ -11071,6 +11111,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6d0858588cb91c488efaa7dffe2054e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1319466176
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1319466177}
+  m_Layer: 11
+  m_Name: BonfireCheck
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1319466177
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1319466176}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.68, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2078079616}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1321021103
 GameObject:
   m_ObjectHideFlags: 0
@@ -44318,6 +44389,31 @@ Transform:
   - {fileID: 1850200802}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1640320302 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5279488530294178745, guid: b17a3fa7657d60a45ae08180a9229f6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 66480714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1640320306 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 6624768658946327647, guid: b17a3fa7657d60a45ae08180a9229f6b,
+    type: 3}
+  m_PrefabInstance: {fileID: 66480714}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1640320307
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1640320302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05c3af1197c1b504f9bd6cc6a62fe549, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activationVisual: {fileID: 0}
 --- !u!1 &1671423152
 GameObject:
   m_ObjectHideFlags: 0
@@ -44862,11 +44958,16 @@ MonoBehaviour:
   ledgeCheckHorizontal: {fileID: 0}
   ledgeCheckVertical: {fileID: 387086606}
   ceilingCheck: {fileID: 0}
+  bonfireCheck: {fileID: 0}
   groundCheckRadius: 0.3
   wallCheckDistance: 0.3
+  bonfireCheckDistance: 0
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  whatIsBonfire:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!1 &1850200801
 GameObject:
   m_ObjectHideFlags: 0
@@ -45212,6 +45313,7 @@ Transform:
   - {fileID: 3865878}
   - {fileID: 320959950}
   - {fileID: 800112516}
+  - {fileID: 1319466177}
   m_Father: {fileID: 172407430}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2078079617
@@ -45231,11 +45333,16 @@ MonoBehaviour:
   ledgeCheckHorizontal: {fileID: 320959950}
   ledgeCheckVertical: {fileID: 0}
   ceilingCheck: {fileID: 800112516}
+  bonfireCheck: {fileID: 1319466177}
   groundCheckRadius: 0.3
   wallCheckDistance: 0.5
+  bonfireCheckDistance: 0.5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 256
+  whatIsBonfire:
+    serializedVersion: 2
+    m_Bits: 8192
 --- !u!4 &2101740442 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1398328418323785778, guid: 09ad0fb67dd07c849958ce1a5b26b0ca,

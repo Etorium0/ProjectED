@@ -19,6 +19,7 @@ public class PlayerInputHandler : MonoBehaviour
     public bool GrabInput { get; private set; }
     public bool DashInput { get; private set; }
     public bool DashInputStop { get; private set; }
+    public bool RestInput { get; private set; }
 
     public bool[] AttackInputs { get; private set; }
 
@@ -133,9 +134,24 @@ public class PlayerInputHandler : MonoBehaviour
         DashDirectionInput = Vector2Int.RoundToInt(RawDashDirectionInput.normalized);
     }
 
+    public void OnRestInput(InputAction.CallbackContext context)
+    {
+        if (context.started)
+        {
+            RestInput = true;
+        }
+
+        if (context.canceled)
+        {
+            RestInput = false;
+        }
+    }
+
     public void UseJumpInput() => JumpInput = false;
 
     public void UseDashInput() => DashInput = false;
+    
+    public void UseRestInput() => RestInput = false;
 
     /// <summary>
     /// Used to set the specific attack input back to false. Usually passed through the player attack state from an animation event.

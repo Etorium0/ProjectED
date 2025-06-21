@@ -2,10 +2,13 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
 TagManager:
-  serializedVersion: 2
+  serializedVersion: 3
   tags:
   - Enemy
   - ParticleContainer
+  - Checkpoint
+  - CheckpointRangeCheck
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - Dead
   - Player
   - Weapon
-  - 
+  - Bonfire
   - 
   - 
   - 
@@ -67,3 +70,5 @@ TagManager:
   - name: Foreground Decoration
     uniqueID: 1796422411
     locked: 0
+  m_RenderingLayers:
+  - Default
