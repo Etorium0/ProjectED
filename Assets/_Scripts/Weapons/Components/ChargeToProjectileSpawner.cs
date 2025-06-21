@@ -1,8 +1,4 @@
-﻿using System;
-using Etorium.ObjectPoolSystem;
-using Etorium.ProjectileSystem;
-using Etorium.Weapons.Components;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
@@ -24,9 +20,9 @@ namespace Etorium.Weapons.Components
         {
             if(newInput || hasReadCharge)
                 return;
-
+            
             var newStrategy =
-                new ChargeProjectileSpawnerStrategy(currentAttackData.AngleVariation, charge.CurrentCharge);
+                new ChargeProjectileSpawnerStrategy(currentAttackData.AngleVariation, charge.TakeFinalChargeReading());
 
             projectileSpawner.SetProjectileSpawnerStrategy(newStrategy);
 

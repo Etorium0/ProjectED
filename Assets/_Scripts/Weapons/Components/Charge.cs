@@ -1,5 +1,7 @@
 ﻿using System;
+using Etorium.CoreSystem;
 using Etorium.Utilities;
+using UnityEngine;
 
 namespace Etorium.Weapons.Components
 {
@@ -9,8 +11,16 @@ namespace Etorium.Weapons.Components
 
         private TimeNotifier timeNotifier;
 
+        private ParticleManager particleManager;
+
         public int CurrentCharge => currentCharge;
 
+        public int TakeFinalChargeReading()
+        {
+            timeNotifier.Disable();
+            return CurrentCharge;
+        }
+        
         protected override void HandleEnter()
         {
             base.HandleEnter();
@@ -23,17 +33,18 @@ namespace Etorium.Weapons.Components
         private void HandleNotify()
         {
             currentCharge++;
-
+            
             if (currentCharge >= currentAttackData.NumberOfCharges)
             {
                 currentCharge = currentAttackData.NumberOfCharges;
                 timeNotifier.Disable();
-                // Spawn fully charge particles
-                return;
+                particleManager.StartParticlesRelative(currentAttackData.FullyChargedIndicatorParticlePrefab,
+                    currentAttackData.Offset, Quaternion.identity);
             }
             else
             {
-                //spawn single charge particle
+                particleManager.StartParticlesRelative(currentAttackData.ChargeIncreaseIndicatorParticlePrefab,
+                    currentAttackData.Offset, Quaternion.identity);
             }
         }
 
@@ -54,6 +65,13 @@ namespace Etorium.Weapons.Components
             timeNotifier = new TimeNotifier();
 
             timeNotifier.OnNotify += HandleNotify;
+        }
+
+        protected override void Start()
+        {
+            base.Start();
+
+            particleManager = Core.GetCoreComponent<ParticleManager>();
         }
 
         private void Update()
