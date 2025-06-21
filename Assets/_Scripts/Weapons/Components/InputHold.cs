@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class InputHold : WeaponComponent
     {

@@ -1,6 +1,6 @@
-﻿using Bardent.ProjectileSystem.DataPackages;
+﻿using Etorium.ProjectileSystem.DataPackages;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     /*
      * This component is responsible for passing information from the DrawModifierDataPackage to the DelayedGravity component.

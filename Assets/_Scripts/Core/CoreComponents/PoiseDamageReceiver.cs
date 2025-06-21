@@ -1,6 +1,6 @@
-﻿using Bardent.Interfaces;
+﻿using Etorium.Interfaces;
 
-namespace Bardent.CoreSystem
+namespace Etorium.CoreSystem
 {
     public class PoiseDamageReceiver : CoreComponent, IPoiseDamageable
     {

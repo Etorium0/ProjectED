@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bardent.Weapons.Components;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
-namespace Bardent.Weapons
+namespace Etorium.Weapons
 {
     [CreateAssetMenu(fileName = "newWeaponData", menuName = "Data/Weapon Data/Basic Weapon Data", order = 0)]
     public class WeaponDataSO : ScriptableObject

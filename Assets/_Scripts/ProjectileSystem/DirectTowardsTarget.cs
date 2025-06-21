@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bardent.ProjectileSystem.Components;
-using Bardent.ProjectileSystem.DataPackages;
-using Bardent.Utilities;
+using Etorium.ProjectileSystem.Components;
+using Etorium.ProjectileSystem.DataPackages;
+using Etorium.Utilities;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem
+namespace Etorium.ProjectileSystem
 {
     /*
      * This component is responsible for rotating a projectile such that it points in the direction of a target. The projectile is provided with a list of targets

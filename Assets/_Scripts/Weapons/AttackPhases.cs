@@ -1,4 +1,4 @@
-﻿namespace Bardent.Weapons
+﻿namespace Etorium.Weapons
 {
     public enum AttackPhases
     {

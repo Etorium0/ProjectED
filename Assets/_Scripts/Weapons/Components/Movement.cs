@@ -1,7 +1,7 @@
-﻿using Bardent.Weapons.Components;
+﻿using Etorium.Weapons.Components;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class Movement : WeaponComponent<MovementData, AttackMovement>
     {

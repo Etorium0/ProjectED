@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardent.ObjectPoolSystem;
-using Bardent.ProjectileSystem.DataPackages;
+using Etorium.ObjectPoolSystem;
+using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem
+namespace Etorium.ProjectileSystem
 {
     /*
      * Before the projectiles are fully integrated with the rest of the weapon system, we need to develop and test them. Doing this in a separate scene makes it easier

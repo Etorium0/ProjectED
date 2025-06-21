@@ -1,8 +1,8 @@
 ﻿using System;
-using Bardent.CoreSystem;
+using Etorium.CoreSystem;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class ActionHitBox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
     {

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Bardent.Interfaces;
+using Etorium.Interfaces;
 using UnityEngine;
 
-namespace Bardent.ObjectPoolSystem
+namespace Etorium.ObjectPoolSystem
 {
     /*
      * The ObjectPools class is used to store multiple object pools in a single place with an easy way to access them. It holds a dictionary

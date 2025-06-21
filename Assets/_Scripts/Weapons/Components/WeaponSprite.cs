@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Bardent.Weapons.Components;
+using Etorium.Weapons.Components;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class WeaponSprite : WeaponComponent<WeaponSpriteData, AttackSprites>
     {

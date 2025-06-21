@@ -1,4 +1,4 @@
-﻿namespace Bardent.Weapons.Components
+﻿namespace Etorium.Weapons.Components
 {
     public class PoiseDamageData : ComponentData<AttackPoiseDamage>
     {

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.Weapons
+namespace Etorium.Weapons
 {
     /*
      * This is an empty MonoBehaviour used to help identify a specific GameObject. This GameObject should be a child of the Base weapon GameObject
