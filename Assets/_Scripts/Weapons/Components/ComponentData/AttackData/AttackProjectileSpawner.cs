@@ -1,9 +1,9 @@
 ﻿using System;
-using Bardent.ProjectileSystem;
-using Bardent.ProjectileSystem.DataPackages;
+using Etorium.ProjectileSystem;
+using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     [Serializable]
     public class AttackProjectileSpawner : AttackData

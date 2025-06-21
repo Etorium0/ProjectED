@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     /// <summary>
     /// This class rotates the current GameObject such that transform.Right points in the same direction as the velocity vector

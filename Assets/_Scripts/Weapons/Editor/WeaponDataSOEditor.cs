@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Bardent.Weapons.Components;
+using Etorium.Weapons.Components;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 
-namespace Bardent.Weapons
+namespace Etorium.Weapons
 {
     [CustomEditor(typeof(WeaponDataSO))]
     public class WeaponDataSOEditor : Editor

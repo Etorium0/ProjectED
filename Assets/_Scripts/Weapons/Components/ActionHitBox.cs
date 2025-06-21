@@ -1,8 +1,8 @@
 ﻿using System;
-using Bardent.CoreSystem;
+using Etorium.CoreSystem;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class ActionHitBox : WeaponComponent<ActionHitBoxData, AttackActionHitBox>
     {
@@ -35,13 +35,13 @@ namespace Bardent.Weapons.Components
 
             movement = new CoreComp<CoreSystem.Movement>(Core);
             
-            eventHandler.OnAttackAction += HandleAttackAction;
+            EventHandler.OnAttackAction += HandleAttackAction;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
-            eventHandler.OnAttackAction -= HandleAttackAction;
+            EventHandler.OnAttackAction -= HandleAttackAction;
         }
 
         private void OnDrawGizmosSelected()

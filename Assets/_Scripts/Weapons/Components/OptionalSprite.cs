@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     /*
      * This weapon component is responsible for showing an optional sprite during an attack. The OptionalSprite GameObject has a sprite renderer where
@@ -42,14 +42,14 @@ namespace Bardent.Weapons.Components
         {
             base.Start();
 
-            eventHandler.OnSetOptionalSpriteActive += HandleSetOptionalSpriteActive;
+            EventHandler.OnSetOptionalSpriteActive += HandleSetOptionalSpriteActive;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            eventHandler.OnSetOptionalSpriteActive -= HandleSetOptionalSpriteActive;
+            EventHandler.OnSetOptionalSpriteActive -= HandleSetOptionalSpriteActive;
         }
 
         #endregion

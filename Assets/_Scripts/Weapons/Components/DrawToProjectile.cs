@@ -1,7 +1,7 @@
-﻿using Bardent.ProjectileSystem;
-using Bardent.ProjectileSystem.DataPackages;
+﻿using Etorium.ProjectileSystem;
+using Etorium.ProjectileSystem.DataPackages;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     /*
      * This component works with both the Draw and ProjectileSpawner components. It listens for the evaluation event from Draw and the projectile spawned event from the projectile spawner.

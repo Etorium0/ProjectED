@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections;
-using Bardent.Utilities;
+using Etorium.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     /// <summary>
     /// This component is responsible for ensuring the projectile gets stuck in a specific layer based on what the HitBox detects

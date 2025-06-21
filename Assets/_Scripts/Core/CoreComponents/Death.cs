@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Bardent.CoreSystem
+namespace Etorium.CoreSystem
 {
     public class Death : CoreComponent
     {
@@ -10,10 +10,17 @@ namespace Bardent.CoreSystem
             particleManager ? particleManager : core.GetCoreComponent(ref particleManager);
     
         private ParticleManager particleManager;
+        private GameManager gameManager;
 
         private Stats Stats => stats ? stats : core.GetCoreComponent(ref stats);
         private Stats stats;
     
+        protected override void Awake()
+        {
+            base.Awake();
+            gameManager = FindObjectOfType<GameManager>();
+        }
+
         public void Die()
         {
             foreach (var particle in deathParticles)
@@ -21,7 +28,8 @@ namespace Bardent.CoreSystem
                 ParticleManager.StartParticles(particle);
             }
         
-            core.transform.parent.gameObject.SetActive(false);
+            // core.transform.parent.gameObject.SetActive(false);
+            gameManager.Respawn();
         }
 
         private void OnEnable()

@@ -1,16 +1,14 @@
 ﻿using System;
-using Bardent.CoreSystem;
+using Etorium.CoreSystem;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public abstract class WeaponComponent : MonoBehaviour
     {
         protected Weapon weapon;
 
-        // TODO: Fix this when finishing weapon data
-        // protected AnimationEventHandler EventHandler => weapon.EventHandler;
-        protected AnimationEventHandler eventHandler;
+        protected AnimationEventHandler EventHandler => weapon.EventHandler;
         protected Core Core => weapon.Core;
         protected float attackStartTime => weapon.AttackStartTime;
 
@@ -24,8 +22,6 @@ namespace Bardent.Weapons.Components
         protected virtual void Awake()
         {
             weapon = GetComponent<Weapon>();
-
-            eventHandler = GetComponentInChildren<AnimationEventHandler>();
         }
 
         protected virtual void Start()

@@ -1,7 +1,7 @@
-﻿using Bardent.Weapons.Components;
+﻿using Etorium.Weapons.Components;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     public class Movement : WeaponComponent<MovementData, AttackMovement>
     {
@@ -24,16 +24,16 @@ namespace Bardent.Weapons.Components
         {
             base.Start();
 
-            eventHandler.OnStartMovement += HandleStartMovement;
-            eventHandler.OnStopMovement += HandleStopMovement;
+            EventHandler.OnStartMovement += HandleStartMovement;
+            EventHandler.OnStopMovement += HandleStopMovement;
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
             
-            eventHandler.OnStartMovement -= HandleStartMovement;
-            eventHandler.OnStopMovement -= HandleStopMovement;
+            EventHandler.OnStartMovement -= HandleStartMovement;
+            EventHandler.OnStopMovement -= HandleStopMovement;
         }
     }
 }

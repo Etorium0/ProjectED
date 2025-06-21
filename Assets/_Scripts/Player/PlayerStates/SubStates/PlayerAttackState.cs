@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using Bardent.Weapons;
+using Etorium.Weapons;
 using UnityEngine;
 
 public class PlayerAttackState : PlayerAbilityState

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Bardent.CoreSystem
+namespace Etorium.CoreSystem
 {
     public class DamageReceiver : CoreComponent, IDamageable
     {

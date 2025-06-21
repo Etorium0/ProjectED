@@ -1,8 +1,8 @@
 ﻿using System;
-using Bardent.ProjectileSystem.DataPackages;
+using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem
+namespace Etorium.ProjectileSystem
 {
     /// <summary>
     /// This class is the interface between projectile components and any entity that spawns a projectile.

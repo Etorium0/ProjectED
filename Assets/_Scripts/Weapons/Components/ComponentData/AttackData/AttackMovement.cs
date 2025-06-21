@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Bardent.Weapons.Components
+namespace Etorium.Weapons.Components
 {
     [Serializable]
     public class AttackMovement : AttackData

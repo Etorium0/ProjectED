@@ -1,7 +1,7 @@
-﻿using Bardent.ProjectileSystem.DataPackages;
+﻿using Etorium.ProjectileSystem.DataPackages;
 using UnityEngine;
 
-namespace Bardent.ProjectileSystem.Components
+namespace Etorium.ProjectileSystem.Components
 {
     /*
      * The Graphics projectile component is responsible for changing out the sprite on the sprite renderer on the Graphics child GameObject
