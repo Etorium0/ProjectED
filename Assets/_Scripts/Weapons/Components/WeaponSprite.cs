@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using Etorium.Weapons.Components;
 using UnityEngine;
 
@@ -58,7 +57,7 @@ namespace Etorium.Weapons.Components
             
             baseSpriteRenderer.RegisterSpriteChangeCallback(HandleBaseSpriteChange);
 
-            eventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
+            EventHandler.OnEnterAttackPhase += HandleEnterAttackPhase;
         }
 
         protected override void OnDestroy()
@@ -67,7 +66,7 @@ namespace Etorium.Weapons.Components
             
             baseSpriteRenderer.UnregisterSpriteChangeCallback(HandleBaseSpriteChange);
             
-            eventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
+            EventHandler.OnEnterAttackPhase -= HandleEnterAttackPhase;
         }
     }
 }
