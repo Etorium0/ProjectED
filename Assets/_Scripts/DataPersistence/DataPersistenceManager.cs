@@ -18,6 +18,7 @@ public class DataPersistenceManager : MonoBehaviour
     private GameData gameData;
     private List<IDataPersistence> dataPersistenceObjects;
     private FileDataHandler dataHandler;
+    private bool isNewGame = false; // Flag để track new game
 
     public static DataPersistenceManager instance { get; private set; }
 
@@ -50,17 +51,37 @@ public class DataPersistenceManager : MonoBehaviour
     public void OnSceneLoaded(Scene scene, LoadSceneMode mode) 
     {
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
-        LoadGame();
+        
+        if (isNewGame)
+        {
+            // New game - don't load from file, use fresh data
+            Debug.Log("New game - using fresh data, not loading from file");
+            isNewGame = false; // Reset flag
+            
+            // Push fresh data to all objects
+            foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects) 
+            {
+                dataPersistenceObj.LoadData(gameData);
+            }
+        }
+        else
+        {
+            // Continue game - load from file
+            LoadGame();
+        }
     }
 
     public void OnSceneUnloaded(Scene scene)
     {
-        SaveGame();
+        // AUTO-SAVE DISABLED - Only save at Rest Points/Bonfires
+        // SaveGame();
     }
 
     public void NewGame() 
     {
         this.gameData = new GameData();
+        this.isNewGame = true; // Set flag để không load từ file
+        Debug.Log("New game created - fresh data will be used");
     }
 
     public void LoadGame()
@@ -109,7 +130,8 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void OnApplicationQuit() 
     {
-        SaveGame();
+        // AUTO-SAVE DISABLED - Only save at Rest Points/Bonfires
+        // SaveGame();
     }
 
     private List<IDataPersistence> FindAllDataPersistenceObjects() 

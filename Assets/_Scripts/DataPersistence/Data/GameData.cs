@@ -9,6 +9,8 @@ namespace Etorium.DataPersistence.Data
     {
         public int deathCount;
         public Vector3 playerPosition;
+        public Vector3 lastRestPosition;
+        public string lastRestId;
         // public SerializableDictionary<string, bool> coinsCollected;
 
         // the values defined in this constructor will be the default values
@@ -17,6 +19,8 @@ namespace Etorium.DataPersistence.Data
         {
             this.deathCount = 0;
             playerPosition = Vector3.zero;
+            lastRestPosition = Vector3.zero;
+            lastRestId = "";
             // coinsCollected = new SerializableDictionary<string, bool>();
         }
     }

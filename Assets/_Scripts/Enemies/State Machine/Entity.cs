@@ -18,13 +18,13 @@ public class Entity : MonoBehaviour {
 	public Core Core { get; private set; }
 
 	[SerializeField]
-	private Transform wallCheck;
+	protected Transform wallCheck;
 	[SerializeField]
-	private Transform ledgeCheck;
+	protected Transform ledgeCheck;
 	[SerializeField]
-	private Transform playerCheck;
+	protected Transform playerCheck;
 	[SerializeField]
-	private Transform groundCheck;
+	protected Transform groundCheck;
 
 	private float currentHealth;
 	private float currentStunResistance;
@@ -86,6 +86,11 @@ public class Entity : MonoBehaviour {
 	public virtual void ResetStunResistance() {
 		isStunned = false;
 		currentStunResistance = entityData.stunResistance;
+	}
+
+	public virtual float GetCurrentHealth()
+	{
+		return stats.Health.CurrentValue;
 	}
 
 	public virtual void OnDrawGizmos() {
