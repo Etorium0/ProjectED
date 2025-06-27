@@ -80,7 +80,7 @@ namespace Etorium.Weapons
         
         public void SetCanEnterAttack(bool value) => CanEnterAttack = value;
 
-        private void Exit()
+        public void Exit()
         {
             anim.SetBool("active", false);
 

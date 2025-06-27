@@ -9,6 +9,8 @@ namespace Etorium.Weapons
 {
     public class WeaponGenerator : MonoBehaviour
     {
+        public event Action OnWeaponGenerating;
+        
         [SerializeField] private Weapon weapon;
         [SerializeField] private CombatInputs combatInput;
 
@@ -19,23 +21,20 @@ namespace Etorium.Weapons
         private List<Type> componentDependencies = new List<Type>();
 
         private Animator anim;
-        
+
         private WeaponInventory weaponInventory;
-        
-        private void Start()
-        {
-            weaponInventory = weapon.Core.GetCoreComponent<WeaponInventory>();
-            anim = GetComponentInChildren<Animator>();
 
-            if (weaponInventory.TryGetWeapon((int)combatInput, out var data))
-            {
-                GenerateWeapon(data);
-            }
-        }
-
-        public void GenerateWeapon(WeaponDataSO data)
+        private void GenerateWeapon(WeaponDataSO data)
         {
+            OnWeaponGenerating?.Invoke();
+            
             weapon.SetData(data);
+
+            if (data is null)
+            {
+                weapon.SetCanEnterAttack(false);
+                return;
+            }
             
             componentAlreadyOnWeapon.Clear();
             componentsAddedToWeapon.Clear();
@@ -74,5 +73,36 @@ namespace Etorium.Weapons
             
             weapon.SetCanEnterAttack(true);
         }
+        
+        private void HandleWeaponDataChanged(int inputIndex, WeaponDataSO data)
+        {
+            if (inputIndex != (int)combatInput)
+                return;
+            
+            GenerateWeapon(data);
+        }
+        
+        #region Plumbing
+
+        private void Start()
+        {
+            weaponInventory = weapon.Core.GetCoreComponent<WeaponInventory>();
+
+            weaponInventory.OnWeaponDataChanged += HandleWeaponDataChanged;
+            
+            anim = GetComponentInChildren<Animator>();
+
+            if (weaponInventory.TryGetWeapon((int)combatInput, out var data))
+            {
+                GenerateWeapon(data);
+            }
+        }
+
+        private void OnDestroy()
+        {
+            weaponInventory.OnWeaponDataChanged -= HandleWeaponDataChanged;
+        }
+
+        #endregion
     }
 }
