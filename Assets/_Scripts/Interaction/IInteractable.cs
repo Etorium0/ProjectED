@@ -16,5 +16,7 @@ namespace Etorium.Interaction
     public interface IInteractable<T> : IInteractable
     {
         T GetContext();
+        
+        void SetContext(T context);
     }
 }

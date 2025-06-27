@@ -40,16 +40,11 @@ namespace Etorium.CoreSystem
 
         public GameObject StartParticlesRelative(GameObject particlePrefab, Vector2 offset, Quaternion rotation)
         {
-            var pos = FindPointRelativeToPositionAndFacingDirection(offset);
+            var pos = FindRelativePoint(offset);
 
             return StartParticles(particlePrefab, pos, rotation);
         }
-        
-        private Vector2 FindPointRelativeToPositionAndFacingDirection(Vector2 offset)
-        {
-            offset.x *= movement.FacingDirection;
 
-            return transform.position + (Vector3)offset;
-        }
+        private Vector2 FindRelativePoint(Vector2 offset) => movement.FindRelativePoint(offset);
     }
 }
