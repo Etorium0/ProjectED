@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerAttackState : PlayerAbilityState
 {
     private Weapon weapon;
+    private WeaponGenerator weaponGenerator;
 
     private int inputIndex;
 
@@ -19,6 +20,8 @@ public class PlayerAttackState : PlayerAbilityState
     ) : base(player, stateMachine, playerData, animBoolName)
     {
         this.weapon = weapon;
+        
+        weaponGenerator = weapon.GetComponent<WeaponGenerator>();
 
         inputIndex = (int)input;
 
@@ -32,14 +35,30 @@ public class PlayerAttackState : PlayerAbilityState
 
         weapon.CurrentInput = player.InputHandler.AttackInputs[inputIndex];
     }
+    
+    private void HandleWeaponGenerating()
+    {
+        stateMachine.ChangeState(player.IdleState);
+    }
 
     public override void Enter()
     {
         base.Enter();
+        
+        weaponGenerator.OnWeaponGenerating += HandleWeaponGenerating;
 
         weapon.Enter();
     }
-    
+
+    public override void Exit()
+    {
+        base.Exit();
+        
+        weaponGenerator.OnWeaponGenerating -= HandleWeaponGenerating;
+
+        weapon.Exit();
+    }
+
     public bool CanTransitionToAttackState() => weapon.CanEnterAttack;
 
     private void HandleUseInput()

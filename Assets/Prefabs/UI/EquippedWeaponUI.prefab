@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5877837079954766518}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -109,7 +108,6 @@ RectTransform:
   - {fileID: 5877837080094945639}
   - {fileID: 7413115918262728561}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -125,11 +123,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 5877837079954766513}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83a1c6ffe690463da3a69b76ab5d47cb, type: 3}
+  m_Script: {fileID: 11500000, guid: 694c6ddeaab587b4a95c9f3709b30882, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponData: {fileID: 11400000, guid: 4a936cdbbada63143b9a868912282179, type: 2}
   weaponIcon: {fileID: 948980634871817847}
+  input: 0
+  weaponInventory: {fileID: 0}
 --- !u!1 &5877837080094945638
 GameObject:
   m_ObjectHideFlags: 0
@@ -161,7 +160,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5877837079954766518}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -237,7 +235,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5877837079954766518}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}

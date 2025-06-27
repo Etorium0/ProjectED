@@ -1,6 +1,7 @@
 ﻿using System;
 using Etorium.Weapons;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Etorium.Interaction.Interactables
 {
@@ -9,12 +10,17 @@ namespace Etorium.Interaction.Interactables
     {
         [field: SerializeField] public Rigidbody2D Rigidbody2D { get; private set; }
 
+        [SerializeField] private SpriteRenderer weaponIcon;
+        [SerializeField] private Bobber bobber;
+        
         [SerializeField] private WeaponDataSO weaponData;
         
         public WeaponDataSO GetContext() => weaponData;
         public void SetContext(WeaponDataSO context)
         {
             weaponData = context;
+
+            weaponIcon.sprite = weaponData.Icon;
         }
 
         public void Interact()
@@ -24,12 +30,12 @@ namespace Etorium.Interaction.Interactables
 
         public void EnableInteraction()
         {
-            print("Enable Interaction");
+            bobber.StartBobbing();
         }
 
         public void DisableInteraction()
         {
-            print("Disable Interaction");
+            bobber.StopBobbing();
         }
 
         public Vector3 GetPosition()
@@ -40,6 +46,12 @@ namespace Etorium.Interaction.Interactables
         private void Awake()
         {
             Rigidbody2D ??= GetComponent<Rigidbody2D>();
+            weaponIcon ??= GetComponentInChildren<SpriteRenderer>();
+            
+            if(weaponData is null)
+                return;
+
+            weaponIcon.sprite = weaponData.Icon;
         }
     }
 }
