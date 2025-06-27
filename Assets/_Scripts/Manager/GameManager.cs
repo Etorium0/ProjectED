@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
 using UnityEngine;
 using UnityEngine.Events;
 using Cinemachine;
@@ -14,7 +13,12 @@ public class GameManager : MonoBehaviour, IDataPersistence
     private GameObject player;
     [SerializeField]
     private float respawnTime;
+    
+    public event Action<GameState> OnGameStateChanged;
+    private GameState currentGameState = GameState.Gameplay;
 
+
+    #region Respawn
     private float respawnTimeStart;
 
     private bool respawn;
@@ -38,12 +42,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         // Khởi tạo với vị trí spawn ban đầu
         lastCheckpointPosition = initialSpawnPoint.position;
     }
-
-    private void Start()
-    {
-        // Player position will be loaded by DataPersistenceManager automatically
-    }
-
+    
     private void Update()
     {
         CheckRespawn();
@@ -78,7 +77,9 @@ public class GameManager : MonoBehaviour, IDataPersistence
             OnPlayerRespawn.Invoke();
         }
     }
-    
+    #endregion
+
+    #region SaveLogic
     // IDataPersistence implementation
     public void LoadData(GameData data)
     {
@@ -114,6 +115,7 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.lastRestPosition = this.lastCheckpointPosition;
         data.playerPosition = this.lastCheckpointPosition; // Update player position too
     }
+    #endregion
     
     // Getter methods
     public int GetDeathCount()
@@ -125,4 +127,46 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         return lastCheckpointPosition;
     }
+
+    #region Game States
+
+    public void ChangeState(GameState state)
+    {
+        if (state == currentGameState)
+            return;
+
+        switch (state)
+        {
+            case GameState.UI:
+                EnterUIState();
+                break;
+            case GameState.Gameplay:
+                EnterGameplayState();
+                break;
+            default:
+                throw new ArgumentOutOfRangeException(nameof(state), state, null);
+        }
+
+        currentGameState = state;
+        OnGameStateChanged?.Invoke(currentGameState);
+    }
+
+    private void EnterUIState()
+    {
+        Time.timeScale = 0f;
+    }
+
+    private void EnterGameplayState()
+    {
+        Time.timeScale = 1f;
+    }
+
+
+    public enum GameState
+    {
+        UI,
+        Gameplay
+    }
+
+    #endregion
 }
