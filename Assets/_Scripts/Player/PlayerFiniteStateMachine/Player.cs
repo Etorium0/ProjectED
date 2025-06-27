@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     public PlayerCrouchMoveState CrouchMoveState { get; private set; }
     public PlayerAttackState PrimaryAttackState { get; private set; }
     public PlayerAttackState SecondaryAttackState { get; private set; }
+    public PlayerRestState RestState { get; private set; }
 
     [SerializeField]
     private PlayerData playerData;
@@ -37,6 +38,10 @@ public class Player : MonoBehaviour
     public Rigidbody2D RB { get; private set; }
     public Transform DashDirectionIndicator { get; private set; }
     public BoxCollider2D MovementCollider { get; private set; }
+    
+    public Stats Stats { get; private set; }
+    
+    public InteractableDetector InteractableDetector { get; private set; }
     #endregion
 
     #region Other Variables         
@@ -59,6 +64,9 @@ public class Player : MonoBehaviour
         primaryWeapon.SetCore(Core);
         secondaryWeapon.SetCore(Core);
         
+        Stats = Core.GetCoreComponent<Stats>();
+        InteractableDetector = Core.GetCoreComponent<InteractableDetector>();
+        
         StateMachine = new PlayerStateMachine();
 
         IdleState = new PlayerIdleState(this, StateMachine, playerData, "idle");
@@ -76,16 +84,20 @@ public class Player : MonoBehaviour
         CrouchMoveState = new PlayerCrouchMoveState(this, StateMachine, playerData, "crouchMove");
         PrimaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", primaryWeapon, CombatInputs.primary);
         SecondaryAttackState = new PlayerAttackState(this, StateMachine, playerData, "attack", secondaryWeapon, CombatInputs.secondary);
+        RestState = new PlayerRestState(this, StateMachine, playerData, "rest");
     }
 
     private void Start()
     {
         Anim = GetComponent<Animator>();
         InputHandler = GetComponent<PlayerInputHandler>();
+        
+        InputHandler.OnInteractInputChanged += InteractableDetector.TryInteract;
+        
         RB = GetComponent<Rigidbody2D>();
         DashDirectionIndicator = transform.Find("DashDirectionIndicator");
         MovementCollider = GetComponent<BoxCollider2D>();
-
+        
         StateMachine.Initialize(IdleState);
     }
 

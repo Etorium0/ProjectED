@@ -1,0 +1,73 @@
+﻿using System;
+using Etorium.Interaction;
+using Etorium.Interaction.Interactables;
+using Etorium.Weapons;
+
+namespace Etorium.CoreSystem
+{
+    public class WeaponSwap : CoreComponent
+    {
+        public event Action<WeaponSwapChoiceRequest> OnChoiceRequested;
+        
+        private InteractableDetector interactableDetector;
+        private WeaponInventory weaponInventory;
+
+        private WeaponDataSO newWeaponData;
+
+        private WeaponPickup weaponPickup;
+        
+        private void HandleTryInteract(IInteractable interactable)
+        {
+            if(interactable is not WeaponPickup pickup)
+                return;
+
+            weaponPickup = pickup;
+
+            newWeaponData = weaponPickup.GetContext();
+
+            if (weaponInventory.TryGetEmptyIndex(out var index))
+            {
+                weaponInventory.TrySetWeapon(newWeaponData, index, out _);
+                interactable.Interact();
+                newWeaponData = null;
+                return;
+            }
+            
+            OnChoiceRequested?.Invoke(new WeaponSwapChoiceRequest(
+                HandleWeaponSwapChoice,
+                weaponInventory.GetWeaponSwapChoices(),
+                newWeaponData
+                ));   
+        }
+
+        private void HandleWeaponSwapChoice(WeaponSwapChoice choice)
+        {
+            weaponInventory.TrySetWeapon(newWeaponData, choice.Index, out _);
+            newWeaponData = null;
+            
+            if(weaponPickup is null)
+                return;
+            
+            weaponPickup.Interact();
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+
+            interactableDetector = core.GetCoreComponent<InteractableDetector>();
+            weaponInventory = core.GetCoreComponent<WeaponInventory>();
+        }
+
+        private void OnEnable()
+        {
+            interactableDetector.OnTryInteract += HandleTryInteract;
+        }
+
+
+        private void OnDisable()
+        {
+            interactableDetector.OnTryInteract -= HandleTryInteract;
+        }
+    }
+}

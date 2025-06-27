@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37a5a6cd738645369231540dd8f9631f, type: 3}
   m_Name: Tome_1
   m_EditorClassIdentifier: 
+  <Icon>k__BackingField: {fileID: -766350882, guid: 7698f902a8e73cb4b88c4738f7fb0ff5,
+    type: 3}
   <AnimatorController>k__BackingField: {fileID: 9100000, guid: 80caa8ced50a9af45801404d8bcc2e1c,
     type: 2}
   <NumberOfAttacks>k__BackingField: 1
@@ -34,13 +36,13 @@ MonoBehaviour:
         attackData:
         - name: Attack 1
           <ChargeTime>k__BackingField: 1
-          <InitialChargeAmount>k__BackingField: 0
+          <InitialChargeAmount>k__BackingField: 1
           <NumberOfCharges>k__BackingField: 3
           <ChargeIncreaseIndicatorParticlePrefab>k__BackingField: {fileID: 6762676686280720063,
             guid: 19758c9f67bb0264e8437296ed15d9ee, type: 3}
           <FullyChargedIndicatorParticlePrefab>k__BackingField: {fileID: 6762676686280720063,
             guid: 19758c9f67bb0264e8437296ed15d9ee, type: 3}
-          <Offset>k__BackingField: {x: 0, y: 0}
+          <ParticlesOffset>k__BackingField: {x: -0.6, y: 0.4}
     - rid: 2299549950738432000
       type: {class: ChargeToProjectileSpawnerData, ns: Etorium.Weapons.Components,
         asm: Assembly-CSharp}

@@ -14,6 +14,8 @@ namespace Etorium.Weapons
         public event Action OnUseInput;
         
         [SerializeField] private float attackCounterResetCooldown;
+        
+        public bool CanEnterAttack { get; private set; }
 
         public WeaponDataSO Data { get; private set; }
         
@@ -75,6 +77,8 @@ namespace Etorium.Weapons
         {
             Data = data;
         }
+        
+        public void SetCanEnterAttack(bool value) => CanEnterAttack = value;
 
         private void Exit()
         {

@@ -39,6 +39,8 @@ public class PlayerAttackState : PlayerAbilityState
 
         weapon.Enter();
     }
+    
+    public bool CanTransitionToAttackState() => weapon.CanEnterAttack;
 
     private void HandleUseInput()
     {
