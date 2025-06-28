@@ -22,11 +22,11 @@ public class BossAttack1State : MeleeAttackState
     {
         base.LogicUpdate();
         
-        Debug.Log($"Boss Attack1 - isAnimationFinished: {isAnimationFinished}");
+        // Debug.Log($"Boss Attack1 - isAnimationFinished: {isAnimationFinished}");
         
         if (isAnimationFinished)
         {
-            Debug.Log("Animation finished, changing back to player detected state...");
+            // Debug.Log("Animation finished, changing back to player detected state...");
             // Quay về playerDetectedState để xử lý logic tiếp theo
             stateMachine.ChangeState(boss.playerDetectedState);
         }

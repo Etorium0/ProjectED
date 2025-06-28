@@ -36,6 +36,14 @@ public class BossWalkState : MoveState
             return;
         }
         
+        // Kiểm tra nếu boss cần heal
+        if (boss.isHealing)
+        {
+            Debug.Log("Boss needs to heal - going to heal state");
+            stateMachine.ChangeState(boss.healState);
+            return;
+        }
+        
         boss.LookAtPlayer();
         
         if (boss.canDoAttack1InRange || boss.canDoAttack2InRange)
@@ -49,9 +57,6 @@ public class BossWalkState : MoveState
         Vector2 target = new Vector2(player.position.x, rb.position.y);
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, boss.walkStateData.movementSpeed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
-        
-        Debug.Log($"Boss chasing player - moving from {rb.position} to {target}");
-        
-        // Logic attack đã được chuyển sang PlayerDetectedState
+                
     }
 } 

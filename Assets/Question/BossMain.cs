@@ -1,4 +1,3 @@
-
 // using System.Collections;
 // using System.Collections.Generic;
 // using UnityEngine;
@@ -57,6 +56,13 @@
 
 //     Vector3 originalPosition;
 
+//     // Heal system
+//     [Header("Heal System")]
+//     [SerializeField] public bool enableHealSystem = true;
+//     [SerializeField] public float healAmount = 0.25f; // 25% max health
+//     [SerializeField] public float healInterruptionTime = 1f; // Thời gian có thể bị gián đoạn
+//     [SerializeField] public float healCooldown = 10f; // Cooldown giữa các lần heal
+    
 //     public bool isHealing = false;
 //     public bool used20PHeal = false;
 //     public bool used40PHeal = false;
@@ -66,13 +72,12 @@
 //     public bool isDead = false;
 //     private bool playerKilled = false;
 
-//     private float healInterruptionTimer = 0;
-
+//     public float healInterruptionTimer = 0;
+//     private float lastHealTime = 0f;
 
 //     // Start is called before the first frame update
 //     void Start()
 //     {
-
 //         rb = GetComponent<Rigidbody2D>();
 //         bossPhysicsBodyCollider = GetComponent<BoxCollider2D>();
 //         anim = GetComponent<Animator>();
@@ -83,7 +88,7 @@
 //         health = maxHealth;
 
 //         audioManager = GameObject.FindGameObjectWithTag("Audio").GetComponent<AudioManager>();
-// 	    originalPosition = transform.position;
+//         originalPosition = transform.position;
 
 //         bonfireUsedEvent = player.GetComponent<BonfireBehaviour>().bonfireUsedEvent;
 //         bonfireUsedEvent.AddListener(resetBoss);
@@ -114,21 +119,21 @@
 //     public void LookAtPlayer()
 //     {
 //         Vector3 flipped = transform.localScale;
-// 		flipped.z *= -1f;
+//         flipped.z *= -1f;
 
-// 		if (transform.position.x < player.transform.position.x && isFlipped)
-// 		{
-// 			transform.localScale = flipped;
-// 			transform.Rotate(0f, 180f, 0f);
-// 			isFlipped = false;
-// 		}
-// 		else if (transform.position.x > player.transform.position.x && !isFlipped)
-// 		{
-// 			transform.localScale = flipped;
-// 			transform.Rotate(0f, 180f, 0f);
-// 			isFlipped = true;
-// 		}
-// 	}
+//         if (transform.position.x < player.transform.position.x && isFlipped)
+//         {
+//             transform.localScale = flipped;
+//             transform.Rotate(0f, 180f, 0f);
+//             isFlipped = false;
+//         }
+//         else if (transform.position.x > player.transform.position.x && !isFlipped)
+//         {
+//             transform.localScale = flipped;
+//             transform.Rotate(0f, 180f, 0f);
+//             isFlipped = true;
+//         }
+//     }
 
 //     public void PerformAttack1()
 //     {
@@ -171,12 +176,16 @@
 
 //     public void Heal()
 //     {
-//         health = Mathf.Min(health + maxHealth * 0.25f, maxHealth);
+//         if (!enableHealSystem) return;
+        
+//         health = Mathf.Min(health + maxHealth * healAmount, maxHealth);
 //         anim.ResetTrigger("Attack1");
 //         anim.ResetTrigger("Attack2");
 //         isHealing = false;
 //         anim.SetBool("isHealing", false);
-//         print("healed");
+//         lastHealTime = Time.time;
+        
+//         Debug.Log($"Boss đã heal! Health hiện tại: {health}/{maxHealth}");
 //     }
 
 //     public void TakeDamage(float damage)
@@ -187,51 +196,61 @@
 //         health -= damage;
 //         Instantiate(bloodParticlePrefab, transform.position, Quaternion.identity);
 //         audioManager.PlaySFX(audioManager.takedamage);
+        
 //         if (health <= 0) 
 //         {
 //             anim.SetBool("Dead", true);
 //             isDead = true;
-
 //             bossDied.Invoke();
 //         }
 
-//         if (isHealing && healInterruptionTimer > 1f)
+//         // Kiểm tra gián đoạn heal
+//         if (isHealing && healInterruptionTimer > healInterruptionTime)
 //         {
-//             // got interrupted while healing
 //             isHealing = false;
 //             anim.SetBool("isHealing", false);
-//             print("interrupted");
+//             Debug.Log("Boss bị gián đoạn khi đang heal!");
 //         }
 
-
-//         if (health < 0.2 * maxHealth && !used20PHeal) 
+//         // Kiểm tra điều kiện heal
+//         if (enableHealSystem && !isHealing && Time.time - lastHealTime > healCooldown)
 //         {
-//             anim.SetBool("isHealing", true);
-//             isHealing = true;
+//             CheckHealConditions();
+//         }
+//     }
+
+//     private void CheckHealConditions()
+//     {
+//         float healthPercentage = health / maxHealth;
+        
+//         if (healthPercentage < 0.2f && !used20PHeal) 
+//         {
+//             TriggerHeal();
 //             used20PHeal = true;
-//             healInterruptionTimer = 0;
 //         }
-//         else if (health < 0.4 * maxHealth && !used40PHeal) 
+//         else if (healthPercentage < 0.4f && !used40PHeal) 
 //         {
-//             anim.SetBool("isHealing", true);
-//             isHealing = true;
+//             TriggerHeal();
 //             used40PHeal = true;
-//             healInterruptionTimer = 0;
 //         }
-//         else if (health < 0.6 * maxHealth && !used60PHeal) 
+//         else if (healthPercentage < 0.6f && !used60PHeal) 
 //         {
-//             anim.SetBool("isHealing", true);
-//             isHealing = true;
+//             TriggerHeal();
 //             used60PHeal = true;
-//             healInterruptionTimer = 0;
 //         }
-//         else if (health < 0.8 * maxHealth && !used80PHeal) 
+//         else if (healthPercentage < 0.8f && !used80PHeal) 
 //         {
-//             anim.SetBool("isHealing", true);
-//             isHealing = true;
+//             TriggerHeal();
 //             used80PHeal = true;
-//             healInterruptionTimer = 0;
 //         }
+//     }
+
+//     private void TriggerHeal()
+//     {
+//         anim.SetBool("isHealing", true);
+//         isHealing = true;
+//         healInterruptionTimer = 0;
+//         Debug.Log("Boss bắt đầu heal!");
 //     }
 
 //     public void resetBoss()
@@ -267,11 +286,12 @@
 //         used40PHeal = false;
 //         used60PHeal = false;
 //         used80PHeal = false;
+//         healInterruptionTimer = 0f;
+//         lastHealTime = 0f;
 //     }
     
 //     public void RemoveBoss()
 //     {
-//         // sr.enabled = false;
 //         Physics2D.IgnoreCollision(bossBodyCollider.GetComponent<BoxCollider2D>(), playerCollider);
 
 //         bossBodyCollider.GetComponent<BoxCollider2D>().enabled = false;
