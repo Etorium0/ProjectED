@@ -12,6 +12,7 @@ public class Boss : Entity
     public BossAttack2State attack2State { get; private set; }
     public BossDeadState deadState { get; private set; }
     public BossPlayerDetectedState playerDetectedState { get; private set; }
+    public BossHealState healState { get; private set; }
     // Thêm các state khác nếu cần
 
     [Header("Boss Data")]
@@ -21,6 +22,7 @@ public class Boss : Entity
     public D_MeleeAttack attack2StateData;
     public D_DeadState deadStateData;
     public D_PlayerDetected playerDetectedData;
+    public D_HealState healStateData;
     // Thêm các data khác nếu cần
 
     [Header("References")]
@@ -34,6 +36,14 @@ public class Boss : Entity
     public bool canDoAttack1InHitzone { get; set; } = false;
     public bool canDoAttack2InRange { get; set; } = false;
     public bool canDoAttack2InHitzone { get; set; } = false;
+
+    // Heal system
+    [Header("Heal System")]
+    [SerializeField] public bool enableHealSystem = true;
+    public bool isHealing { get; set; } = false;
+    public bool used20PHeal { get; set; } = false;
+    private float lastHealTime = 0f;
+    private float lastHealth = 0f;
 
     // Sự kiện chết
     public UnityEvent bossDied = new UnityEvent();
@@ -79,6 +89,7 @@ public class Boss : Entity
         attack1State = new BossAttack1State(this, stateMachine, "Attack1", attack1Position, attack1StateData, this);
         attack2State = new BossAttack2State(this, stateMachine, "Attack2", attack2Position, attack2StateData, this);
         deadState = new BossDeadState(this, stateMachine, "Dead", deadStateData, this);
+        healState = new BossHealState(this, stateMachine, "isHealing", healStateData, this);
     }
 
     public void Start()
@@ -87,6 +98,9 @@ public class Boss : Entity
         
         // Lắng nghe event khi player respawn
         GameManager.OnPlayerRespawn.AddListener(ResetBossOnPlayerRespawn);
+        
+        // Khởi tạo lastHealth
+        lastHealth = stats.Health.CurrentValue;
     }
 
     private void OnDestroy()
@@ -103,6 +117,9 @@ public class Boss : Entity
         canDoAttack1InHitzone = false;
         canDoAttack2InRange = false;
         canDoAttack2InHitzone = false;
+        
+        // Reset heal system
+        ResetHealSystem();
         
         // Hồi máu boss về full
         var stats = Core.GetCoreComponent<Stats>();
@@ -136,6 +153,59 @@ public class Boss : Entity
             canDoAttack2InRange = false;
             canDoAttack2InHitzone = false;
         }
+        
+        // Kiểm tra heal system
+        CheckHealSystem();
+    }
+    
+    private void CheckHealSystem()
+    {
+        float currentHealth = stats.Health.CurrentValue;
+        
+        // Kiểm tra nếu máu giảm (bị damage) và không đang heal
+        if (!isHealing && currentHealth < lastHealth && enableHealSystem && Time.time - lastHealTime > healStateData.healCooldown)
+        {
+            CheckHealConditions();
+        }
+        
+        lastHealth = currentHealth;
+    }
+
+    private void CheckHealConditions()
+    {
+        if (stats == null) return;
+        
+        float healthPercentage = stats.Health.CurrentValue / stats.Health.MaxValue;
+        
+        Debug.Log($"Boss máu: {stats.Health.CurrentValue}/{stats.Health.MaxValue} ({healthPercentage:P0})");
+        
+        if (healthPercentage < healStateData.healthThreshold20 && !used20PHeal) 
+        {
+            Debug.Log($"Boss máu thấp! Trigger heal tại {healthPercentage:P0} máu");
+            TriggerHeal();
+            used20PHeal = true;
+        }
+    }
+
+    private void TriggerHeal()
+    {
+        isHealing = true;
+        lastHealTime = Time.time;
+        Debug.Log($"Boss bắt đầu heal! Máu hiện tại: {stats.Health.CurrentValue}/{stats.Health.MaxValue}");
+        stateMachine.ChangeState(healState);
+    }
+
+    public void OnHealComplete()
+    {
+        isHealing = false;
+        Debug.Log("Boss đã hoàn thành heal, reset trạng thái!");
+    }
+
+    private void ResetHealSystem()
+    {
+        isHealing = false;
+        used20PHeal = false;
+        lastHealTime = 0f;
     }
 
     public override void OnDrawGizmos()
@@ -146,4 +216,4 @@ public class Boss : Entity
         Gizmos.DrawWireSphere(attack2Position.position, attack2StateData.attackRadius);
 
     }
-} 
+}

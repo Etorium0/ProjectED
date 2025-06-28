@@ -4,6 +4,8 @@ using UnityEngine.Events;
 using Cinemachine;
 using Etorium.DataPersistence;
 using Etorium.DataPersistence.Data;
+using Etorium.CoreSystem;   // Cho WeaponInventory
+using Etorium.Weapons;      // Cho WeaponDataSO
 
 public class GameManager : MonoBehaviour, IDataPersistence
 {
@@ -68,13 +70,23 @@ public class GameManager : MonoBehaviour, IDataPersistence
     {
         if(Time.time >= respawnTimeStart + respawnTime && respawn)
         {
-            var playerTemp = Instantiate(player, lastCheckpointPosition, Quaternion.identity);
-            playerTemp.SetActive(true);
-            CVC.m_Follow = playerTemp.transform;
-            respawn = false;
-            
-            // Thông báo cho tất cả boss/enemy rằng player đã respawn
-            OnPlayerRespawn.Invoke();
+            if (player != null)
+            {
+                player.transform.position = lastCheckpointPosition;
+                player.SetActive(true); // Nếu player từng bị disable khi chết
+                // Reset velocity
+                var rb = player.GetComponent<Rigidbody2D>();
+                if (rb != null) rb.linearVelocity = Vector2.zero;
+                // Reset animation, trạng thái khác nếu cần
+                CVC.m_Follow = player.transform;
+                respawn = false;
+                // Thông báo cho tất cả boss/enemy rằng player đã respawn
+                OnPlayerRespawn.Invoke();
+            }
+            else
+            {
+                Debug.LogError("Player reference is null in GameManager!");
+            }
         }
     }
     #endregion
@@ -107,6 +119,26 @@ public class GameManager : MonoBehaviour, IDataPersistence
                 Debug.Log($"New game - Player at initial spawn: {initialSpawnPoint.position}");
             }
         }
+
+        var weaponInventory = player.GetComponentInChildren<WeaponInventory>();
+        if (weaponInventory != null && data.weaponInventoryIds != null)
+        {
+            WeaponDataSO[] allWeapons = Resources.LoadAll<WeaponDataSO>("WeaponData");
+            for (int i = 0; i < data.weaponInventoryIds.Length; i++)
+            {
+                if (!string.IsNullOrEmpty(data.weaponInventoryIds[i]))
+                {
+                    var weapon = Array.Find(allWeapons, w => w.Id == data.weaponInventoryIds[i]);
+                    weaponInventory.TrySetWeapon(weapon, i, out _);
+                }
+                else
+                {
+                    weaponInventory.TrySetWeapon(null, i, out _); // Slot rỗng
+                }
+            }
+            // Gán lại vũ khí đang cầm nếu cần
+            // currentEquippedIndex = data.equippedWeaponIndex;
+        }
     }
     
     public void SaveData(GameData data)
@@ -114,6 +146,21 @@ public class GameManager : MonoBehaviour, IDataPersistence
         data.deathCount = this.deathCount;
         data.lastRestPosition = this.lastCheckpointPosition;
         data.playerPosition = this.lastCheckpointPosition; // Update player position too
+
+        var weaponInventory = player.GetComponentInChildren<WeaponInventory>();
+        if (weaponInventory != null)
+        {
+            // Lưu toàn bộ inventory
+            var weaponList = weaponInventory.weaponData;
+            data.weaponInventoryIds = new string[weaponList.Length];
+            for (int i = 0; i < weaponList.Length; i++)
+            {
+                data.weaponInventoryIds[i] = weaponList[i] != null ? weaponList[i].Id : null;
+            }
+
+            // Lưu index vũ khí đang cầm (nếu có)
+            data.equippedWeaponIndex = 0; // hoặc lấy đúng index vũ khí đang cầm
+        }
     }
     #endregion
     
